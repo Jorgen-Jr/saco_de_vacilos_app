@@ -16,7 +16,7 @@ const Dashboard = () => {
           "id": 1,
           "author_id": 1,
           "guilty_id": 1,
-          "content": "Meu sangue não é -O",
+          "content": "Content of de post",
           "initial_balance": 4,
           "status": "P",
           "deserved_count": 24,
@@ -29,7 +29,7 @@ const Dashboard = () => {
               "id": 1,
               "user_id": 1,
               "post_id": 1,
-              "content": "Modalidade de planos que combrem Enfermaria",
+              "content": "Content of de comment",
               "createdAt": "2020-04-12T19:22:00.000Z",
               "updatedAt": "2020-04-12T19:22:00.000Z"
             }
@@ -66,7 +66,7 @@ const Dashboard = () => {
           "id": 3,
           "author_id": 1,
           "guilty_id": 1,
-          "content": "Vai tomar no c",
+          "content": "Content of de post",
           "initial_balance": 4,
           "status": "P",
           "deserved_count": 0,
@@ -79,7 +79,7 @@ const Dashboard = () => {
               "id": 3,
               "user_id": 1,
               "post_id": 1,
-              "content": "Modalidade de planos que combrem Enfermaria",
+              "content": "Content of de comment",
               "createdAt": "2020-04-12T19:22:09.000Z",
               "updatedAt": "2020-04-12T19:22:09.000Z"
             }
@@ -107,7 +107,7 @@ const Dashboard = () => {
           "id": 4,
           "author_id": 1,
           "guilty_id": 1,
-          "content": "Vai tomar no c",
+          "content": "Content of de post",
           "initial_balance": 4,
           "status": "P",
           "deserved_count": 0,
@@ -139,7 +139,7 @@ const Dashboard = () => {
           "id": 5,
           "author_id": 1,
           "guilty_id": 1,
-          "content": "Vai tomar no c",
+          "content": "Content of de post",
           "initial_balance": 4,
           "status": "P",
           "deserved_count": 0,
