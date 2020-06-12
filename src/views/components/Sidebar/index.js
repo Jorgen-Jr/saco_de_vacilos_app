@@ -5,7 +5,7 @@ import Divider from "@material-ui/core/Divider";
 
 import SidebarItem from './SidebarItem';
 
-import logo from '../../../assets/image/onda_azul_prime.png';
+import logo from '../../../assets/image/logo.png';
 
 import { push as Menu } from 'react-burger-menu';
 

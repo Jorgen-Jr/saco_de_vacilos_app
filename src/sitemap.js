@@ -8,21 +8,21 @@ const sitemap = [
     {
         name: 'home',
         label: 'Início',
-        to: '/',
+        to: '/Home',
         icon: HomeIcon
         // roles: ['Intranet'],
     },
     {
         name: 'profile',
         label: 'Perfil',
-        to: '/',
+        to: '/Profile/:me',
         icon: PersonIcon
         // roles: ['Intranet'],
     },
     {
         name: 'notifications',
         label: 'Notificações',
-        to: '/',
+        to: '/Notifications',
         icon: NotificationsIcon
         // roles: ['Intranet'],
     },

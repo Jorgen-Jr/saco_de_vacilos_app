@@ -40,9 +40,11 @@ class App extends Component {
             <BrowserRouter>
                 <Switch>
                     <Route path="/Login" exact component={Login} />
+
                     {/* Rotas que necessitam de autenticação */}
                     <PrivateRoute path="/" exact component={Dashboard} />
-                    <PrivateRoute path="/Dashboard" component={Dashboard} />
+                    <PrivateRoute path="/Home" component={Dashboard} />
+                    <PrivateRoute path="/Profile/:username" component={Dashboard} />
                     <PrivateRoute path="/Administrator/Users" component={Users} />
                     <PrivateRoute path="/User" component={User}/>
 

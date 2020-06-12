@@ -67,13 +67,18 @@
 }
 .post-btn{
     padding: 5px;
+    color: #666;
+    transition: 0.4s;
+}
+.post-btn:hover{
+    cursor: pointer;
+    color: #333 !important;
 }
 .btn-icon-icon{
     font-size: 1.2rem !important;
     margin: 0 5px;
 }
 .btn-icon{
-    color: #666;
     padding: 5px;
     display: flex;
 }

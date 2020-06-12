@@ -7,10 +7,22 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import ReceiptIcon from '@material-ui/icons/Receipt';
+import CommentIcon from '@material-ui/icons/Comment';
 
 import { convertToDate } from '../../../util/';
 
 const Post = ({ data }) => {
+
+    async function handleDeserveClick(){
+        
+    }
+    async function handleUndeserveClick(){
+        
+    }
+    async function handleCommentClick(){
+        
+    }
+    
     return (
         <div className="post-container">
             <div className="post-author-pic">
@@ -48,6 +60,9 @@ const Post = ({ data }) => {
                     </div>
                     <div className="post-btn">
                         <span className="btn-icon"><ThumbDownIcon className="btn-icon-icon"/> <span>{data.undeserved_count}</span></span>
+                    </div>
+                    <div className="post-btn">
+                        <span className="btn-icon"><CommentIcon className="btn-icon-icon"/> <span>{data.comments.length}</span></span>
                     </div>
                 </div>
             </div>

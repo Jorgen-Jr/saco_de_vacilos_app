@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../../../services/api';
 
 import './style.css';
-import logo from '../../../assets/image/onda_azul_prime.png';
+import logo from '../../../assets/image/logo.png';
 
 import Toast from '../../components/Toast';
 
