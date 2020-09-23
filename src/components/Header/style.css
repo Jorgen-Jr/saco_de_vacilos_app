@@ -1,0 +1,120 @@
+.header-container{
+    position: fixed;
+    padding-left: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #FFFFFF;
+    height: 60px;
+    box-shadow: 1px 1px 2px rgb(182, 182, 182);
+}
+.header-title{
+    padding: 10px;
+}
+.header-link{
+    text-decoration: none;
+    font-size: 14px;
+    margin: 0 15px;
+    font-weight: lighter;
+    color: #333;
+}
+.header-btn-group{
+    display: flex;
+    margin-right: 20px;
+}
+.header-item{
+    margin: auto 5px;
+    display: flex;
+    cursor: pointer;
+}
+.search-bar{
+    max-width: 600px;
+    display: flex;
+    position: relative;
+    margin-right: 5px;
+    margin-left: 0;
+    width: '100%';
+    background: #EEE;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px 25px;
+    flex-grow: 1;
+}
+.search-input{
+    flex-grow: 1;
+    background-color: RGBA(0,0,0,0);
+    border:none;
+}
+.search-icon{
+    padding: 0 10px;
+    margin:auto;
+}
+.profile{
+    border-radius: 30px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    display:flex;
+    background: #EEE;
+}
+.header-icon{
+    margin:auto;
+}
+.popover-icon{
+    margin: auto;
+    margin-left: 2px;
+}
+.popover-btn-group{
+    display: flex;
+}
+a{
+    text-decoration: none;
+}
+.btn-popover{
+    flex: 1;
+    padding: 12px;
+    background-color: #333;
+    color: #FFF;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 80px;
+    border: solid 0 #FFF;
+    transition: 0.4s;
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+}
+.btn-popover:hover{
+    cursor: pointer;
+    background-color: rgb(207, 207, 207);
+    color: #333;
+}
+.btn-logout{
+    color: #FFF;
+    background-color: rgb(218, 60, 60);
+}
+.btn-logout:hover{
+    color: #333;
+    background-color: rgb(255, 98, 98);
+
+}
+.popover-container{
+    overflow: hidden;
+    max-width: 450px;
+    min-width: 250px;
+    background-color: #FFF;
+    border-radius: 7px;
+    box-shadow: 1px 1px 10px rgb(153, 178, 209);
+}
+.react-tiny-popover-container{
+    /* Pra sobrepor os elementos de tab do material-ui */
+    z-index: 1100;
+}
+.popover-content{
+    min-height: 150px;
+    padding: 10px;
+    line-height: 1.8em;
+}
+.popover-content h1{
+    font-size: 18px;
+}

@@ -1,0 +1,16 @@
+.table-responsive{
+    overflow-x: auto;
+}
+.app-table > tbody > tr:hover{
+    background-color: #CCC;
+}
+.btn-select:hover{
+    cursor: pointer;
+    background-color: rgb(49, 49, 49);
+    color: #EEE;
+    box-shadow: 0 0 3px rgb(144, 151, 218);
+}
+.table-pagination{
+    flex-shrink: 0;
+    margin-left: 2px;
+}
