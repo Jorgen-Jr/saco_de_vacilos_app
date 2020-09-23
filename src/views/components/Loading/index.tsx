@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import Lottie from 'react-lottie';
+import Lottie from "react-lottie";
 
-import './style.css';
+import "./style.css";
 
-import waves from './../../../assets/animations/waves.json';
+import waves from "../../../assets/animations/waves.json";
 
 export default function Loading() {
   return (
@@ -15,10 +15,10 @@ export default function Loading() {
             loop: true,
             autoplay: true,
             animationData: waves,
-            rendererSettings:{
+            rendererSettings: {
               className: "lottie-loading-animation",
               viewBoxOnly: true,
-            }
+            },
           }}
           height="400"
           width="400"

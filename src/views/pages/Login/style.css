@@ -1,79 +1,91 @@
-.login-content{
-    display:flex;
+.login-content {
+    display: flex;
     height: 100%;
     overflow: hidden;
 }
-.app-logo{
-    display:flex;
+
+.app-logo {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
-    height:100%;
+    height: 100%;
     max-width: 400px;
-    flex:1;
+    flex: 1;
     overflow: hidden;
     transition: 0.4s;
 }
-.login-background{
+
+.login-background {
     position: absolute;
     top: -50%;
     left: 0;
-    height:150%;
+    height: 150%;
     width: 80%;
-    background:linear-gradient(0 ,#00171f, #2589bd);
+    background: linear-gradient(0, #072AC8, #21FA90);
     clip-path: ellipse(43% 75% at 4% 63%);
     z-index: -10;
     transition: 0.4s;
 }
-.login-background-2{
-    display:none;
+
+.login-background-2 {
+    display: none;
     position: absolute;
     top: 50%;
     left: 20%;
-    height:150px;
+    height: 150px;
     width: 150px;
     background-color: rgb(33, 41, 124);
     clip-path: ellipse(50% 40% at 50% 50%);
     z-index: -10;
     transition: 0.4s;
 }
-.logo-div{
+
+.logo-div {
     transition: 0.4s;
 }
-.logo-img{
+
+.logo-img {
     width: 70%;
     color: #CCC;
     font-size: 72px;
     margin: 40px 20px;
     transition: 0.4s;
 }
-.text-intro{
+
+.text-intro {
     color: #CCC;
     margin: auto;
     padding: 15px;
     transition: 0.4s;
 }
-.text-tiny{
+
+.text-tiny {
     font-size: 0.6em;
     color: rgb(103, 220, 255);
 }
-.form-container{
-    margin:auto;
-    max-width:600px;
+
+.form-container {
+    margin: auto;
+    max-width: 600px;
     padding: 15px;
 }
-.login-welcome{
+
+.login-welcome {
     margin: 0 5px;
     margin-bottom: 30px;
-    color: #313131;  
+    color: #313131;
 }
-.login-welcome h1{
+
+.login-welcome h1 {
     margin-bottom: 5px;
 }
-.login-welcome p{
+
+.login-welcome p {
     color: #616161;
 }
-.form-input{
+
+.form-input {
     padding: 5px;
     margin-bottom: 5px;
     display: inline-block;
@@ -81,32 +93,36 @@
     flex: 1;
 }
 
-.form-input input{
+.form-input input {
     padding: 10px;
     border-radius: 10px;
     width: 100%;
     border: 1px solid #ccc;
     color: #313131;
-    background-color: RGBA(0,0,0,0);
+    background-color: RGBA(0, 0, 0, 0);
     font-size: 14px;
     font-weight: bold;
     box-sizing: border-box;
     transition: 0.4s;
 }
-.form-input input:focus{
+
+.form-input input:focus {
     background: #FFF;
     box-shadow: inset 0 0 3px #3C4ADA;
 }
-.form-input label{
+
+.form-input label {
     display: none;
 }
-.login-btn-group{
+
+.login-btn-group {
     display: flex;
     flex: 1;
     margin: 0 5px;
     justify-content: space-between;
 }
-.btn-login{
+
+.btn-login {
     padding: 12px;
     border-radius: 30px;
     background-color: #3C4ADA;
@@ -114,80 +130,94 @@
     font-size: 14px;
     font-weight: bold;
     min-width: 120px;
-    border: solid 1px RGBA(0,0,0,0);
+    border: solid 1px RGBA(0, 0, 0, 0);
     transition: 0.4s;
 }
-.btn-login:disabled{
+
+.btn-login:disabled {
     background-color: rgb(44, 53, 151);
     color: #FFF;
 }
-.waiting::after{
+
+.waiting::after {
     content: '...';
 }
-.waiting:hover{
+
+.waiting:hover {
     cursor: not-allowed;
     background-color: rgb(44, 53, 151);
     color: #FFF;
 }
-.btn-login:hover{
+
+.btn-login:hover {
     cursor: pointer;
     background-color: #FFF;
     color: #3C4ADA;
     border: solid 1px #3C4ADA;
 }
-.login-forgotpassword{
+
+.login-forgotpassword {
     flex: 1;
     margin: auto;
 }
-.login-content a{
+
+.login-content a {
     color: #3C4ADA;
     text-decoration: none;
     transition: 0.4s;
 }
-.login-content a:hover{
+
+.login-content a:hover {
     color: rgb(40, 48, 105);
 }
-.new-user{
+
+.new-user {
     margin-top: 100px;
     color: #666;
     text-align: center;
 }
 
 @media only screen and (max-width: 620px) {
-    .login-content{
+    .login-content {
         height: unset;
     }
-    .app-logo{
+
+    .app-logo {
         position: absolute;
         margin: 5px;
     }
-    .login-background{
-        position:absolute;
+
+    .login-background {
+        position: absolute;
         width: 140%;
         height: 450px;
         top: -250px;
         left: -40%;
         clip-path: ellipse(50% 40% at 50% 50%);
     }
-    .login-background-2{
-    }
-    .logo-div{
-        position:absolute;
+
+    .login-background-2 {}
+
+    .logo-div {
+        position: absolute;
         top: -20;
     }
-    .logo-img{
+
+    .logo-img {
         position: unset;
         width: 70%;
         color: #FFF;
         top: 0;
         margin: 0;
     }
-    .text-intro{
-        
+
+    .text-intro {
+
         color: #333;
     }
-    .form-container{
-        margin-top:40%;
+
+    .form-container {
+        margin-top: 40%;
         z-index: 5;
     }
 }
