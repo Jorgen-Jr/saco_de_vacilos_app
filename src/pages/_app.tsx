@@ -1,16 +1,30 @@
-import { ThemeProvider, CSSReset, ColorModeProvider } from "@chakra-ui/core";
+import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import "react-toastify/dist/ReactToastify.css";
+import "./../components/Toast/style.css";
+import "./../pages/Register/style.css";
+
+import { Provider, createClient } from "urql";
+
+const client = createClient({
+  url: "http://localhost:2001/graphql",
+  fetchOptions: {
+    credentials: "include",
+  },
+});
 
 import theme from "../theme";
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
-    <ThemeProvider theme={theme}>
-      <ColorModeProvider>
+    <Provider value={client}>
+      <ThemeProvider theme={theme}>
+        {/* <ColorModeProvider> */}
         <CSSReset />
         <Component {...pageProps} />
-      </ColorModeProvider>
-    </ThemeProvider>
+        {/* </ColorModeProvider> */}
+      </ThemeProvider>
+    </Provider>
   );
 }
 
-export default MyApp;
+export default App;

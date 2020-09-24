@@ -1,15 +1,12 @@
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-import './style.css';
+import { toast } from "react-toastify";
 
 export default function Toast(message, type) {
-    toast(message, {
-        className: 'toast',
-        bodyClassName: 'toast-body',
-        progressClassName: 'toast-progress-' + type,
-    });
-/* types
+  toast(message, {
+    className: "toast",
+    bodyClassName: "toast-body",
+    progressClassName: "toast-progress-" + type,
+  });
+  /* types
     - success
     - warning
     - error
