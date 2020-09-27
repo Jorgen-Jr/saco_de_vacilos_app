@@ -10,7 +10,10 @@ import { toErrorMap } from "../../util/toErrorMap";
 
 import { useRouter } from "next/router";
 
-// import logo from "./../assets/image/logo.png";
+const styles = {
+  input_style: { borderRadius: "30px" },
+  input_button: { borderRadius: "30px" },
+};
 
 interface RegisterProps {}
 const Register: React.FC<RegisterProps> = ({}) => {
@@ -47,27 +50,41 @@ const Register: React.FC<RegisterProps> = ({}) => {
         {({ isSubmitting }) => (
           <Form>
             <FormControl>
-              <FormInput name="Nome" placeholder="Nome" label="Nome" />
-              <FormInput
-                name="email"
-                placeholder="E-mail"
-                label="E-mail"
-                type="email"
-              />
               <FormInput
                 name="username"
                 placeholder="Nome de Usuário"
                 label="Nome de Usuário"
+                style={styles.input_style}
               />
               <FormInput
                 name="password"
                 placeholder="Senha"
                 label="Senha"
                 type="password"
+                style={styles.input_style}
+              />
+              <FormInput
+                name="Nome"
+                placeholder="Nome"
+                label="Nome"
+                style={styles.input_style}
+              />
+              <FormInput
+                name="email"
+                placeholder="E-mail"
+                label="E-mail"
+                type="email"
+                style={styles.input_style}
               />
             </FormControl>
 
-            <Button type="submit" isLoading={isSubmitting}>
+            <Button
+              type="submit"
+              isLoading={isSubmitting}
+              style={styles.input_button}
+              variantColor="green"
+              mt="10px"
+            >
               Cadastrar
             </Button>
           </Form>

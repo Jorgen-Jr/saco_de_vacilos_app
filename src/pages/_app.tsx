@@ -1,7 +1,7 @@
 import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 import "react-toastify/dist/ReactToastify.css";
-import "./../components/Toast/style.css";
-import "./../pages/Register/style.css";
+
+import "./legacy_styles.css";
 
 import { Provider, createClient } from "urql";
 

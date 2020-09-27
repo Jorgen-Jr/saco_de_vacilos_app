@@ -8,6 +8,10 @@
 # testing
 /coverage
 
+# Development junk
+.next
+/.next
+
 # production
 /build
 
