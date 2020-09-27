@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
+import { Link } from "@chakra-ui/core";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -45,7 +45,7 @@ function SidebarItem({ depthStep = 10, depth = 0, item, ...rest }) {
     <>
       {/* //TODO This section of the code is garbage */}
       {item.to ? (
-        <Link to={item.to} className="sidebar-link">
+        <Link onClick={() => router.push(item.to)} className="sidebar-link">
           <ListItem
             className={"sidebar-item sidebar-" + depth}
             onClick={onClick}

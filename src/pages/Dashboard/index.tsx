@@ -1,7 +1,6 @@
 import React from "react";
 
-import Layout from "../Layout";
-
+import Layout from "../../components/Layout";
 import UserCard from "../../components/UserCard";
 import NewPost from "../../components/NewPost";
 import Feed from "../../components/Feed";

@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./style.css";
-
 import PersonIcon from "@material-ui/icons/Person";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
@@ -9,7 +7,7 @@ import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import CommentIcon from "@material-ui/icons/Comment";
 
-import { convertToDate } from "../../../util";
+import { convertToDate } from "./../../util";
 
 const Post = ({ data }) => {
   async function handleDeserveClick() {}

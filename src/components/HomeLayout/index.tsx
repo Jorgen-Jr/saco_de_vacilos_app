@@ -21,13 +21,7 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
           {/* <img src={logo} alt="Logo" className="logo-img" /> */}
         </div>
       </div>
-      <div className="form-container">
-        <div className="login-welcome">
-          <h1 className="login-title">Registrar</h1>
-          <p>Favor inserir seus dados de registro.</p>
-        </div>
-        {children}
-      </div>
+      <div className="form-container">{children}</div>
     </div>
   );
 };

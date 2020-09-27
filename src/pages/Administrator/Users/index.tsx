@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import "./style.css";
 
-import Layout from "../../Layout";
+import Layout from "../../../components/Layout";
 
 import api from "../../../../services/api";
 

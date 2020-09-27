@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-
-import "./style.css";
-
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 import PersonIcon from "@material-ui/icons/Person";
@@ -38,12 +34,9 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
-const NewPost = ({ user, dispatch }) => {
+const NewPost = () => {
   const [content, setContent] = useState("");
   const [initial_balance, setInitialBalance] = useState(5);
-  const { persistedLogin } = user;
-
-  const login = persistedLogin;
 
   async function handleSend() {
     console.log(content, initial_balance);
@@ -92,4 +85,4 @@ const NewPost = ({ user, dispatch }) => {
   );
 };
 
-export default connect((state) => ({ user: state.user }))(NewPost);
+export default NewPost;

@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import Sidebar from '../../components/Sidebar';
-import Header from '../../components/Header';
+import Sidebar from "../Sidebar";
+import Header from "../Header";
 
-import items from '../../../sitemap';
-
-import './style.css';
+import items from "./../../sitemap";
 
 export default class Layout extends Component {
   render() {

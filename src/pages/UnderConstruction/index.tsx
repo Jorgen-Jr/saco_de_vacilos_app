@@ -2,9 +2,9 @@ import React from "react";
 
 import Lottie from "react-lottie";
 
-import UnderConstructionAnimation from "../../../assets/animations/underconstruction.json";
+import UnderConstructionAnimation from "./../../assets/animations/underconstruction.json";
 
-import Layout from "../Layout";
+import Layout from "../../components/Layout";
 
 import "./style.css";
 

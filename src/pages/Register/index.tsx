@@ -22,6 +22,11 @@ const Register: React.FC<RegisterProps> = ({}) => {
 
   return (
     <HomeLayout>
+      <div className="login-welcome">
+        <h1 className="login-title">Registrar</h1>
+        <p>Favor inserir seus dados de registro.</p>
+      </div>
+
       <Formik
         initialValues={{ username: "", password: "", email: "", name: "" }}
         onSubmit={async (values, { setErrors }) => {
