@@ -6,37 +6,41 @@ import { FormInput } from "../../components/Form/FormInput";
 import { toErrorMap } from "../../util/toErrorMap";
 
 import { useRouter } from "next/router";
-import { useLoginMutation } from "../../generated/graphql";
+import { useForgotPasswordMutation } from "../../generated/graphql";
 import { Link } from "@chakra-ui/core";
 import { createUrqlClient } from "../../util/createUrqlClient";
 import { withUrqlClient } from "next-urql";
+import Toast from "../../components/Toast";
 
 const styles = {
   input_style: { borderRadius: "30px" },
   input_button: { borderRadius: "30px" },
 };
 
-interface LoginProps {}
+interface ForgotPasswordProps {}
 
-const Login: React.FC<LoginProps> = ({}) => {
-  const [, login] = useLoginMutation();
+const ForgotPassword: React.FC<ForgotPasswordProps> = ({}) => {
+  const [, forgotPassword] = useForgotPasswordMutation();
   const router = useRouter();
 
   return (
     <HomeLayout>
       <div className="login-welcome">
-        <h1 className="login-title">Entre</h1>
-        <p>Favor entrar com suas credenciais.</p>
+        <h1 className="login-title">Esqueceu sua senha? 🤷‍♂️️ </h1>
+        <p>
+          Sem problemas, informe seu e-mail e te enviaremos as instruções para
+          recupera-la.
+        </p>
       </div>
 
       <Formik
-        initialValues={{ usernameOrEmail: "", password: "" }}
+        initialValues={{ email: "" }}
         onSubmit={async (values, { setErrors }) => {
-          const response = await login(values);
+          const response = await forgotPassword(values);
 
-          if (response.data?.login.errors) {
-            console.log(toErrorMap(response.data.login.errors));
-            setErrors(toErrorMap(response.data.login.errors));
+          if (response.data?.forgotPassword.errors) {
+            console.log(toErrorMap(response.data.forgotPassword.errors));
+            setErrors(toErrorMap(response.data.forgotPassword.errors));
           } else {
             router.push("/");
           }
@@ -46,28 +50,20 @@ const Login: React.FC<LoginProps> = ({}) => {
           <Form>
             <FormControl>
               <FormInput
-                name="usernameOrEmail"
-                placeholder="Nome de Usuário ou Email"
-                label="Nome de usuário ou email"
-                style={styles.input_style}
-              />
-              <FormInput
-                name="password"
-                placeholder="Senha"
-                label="Senha"
-                type="password"
+                name="email"
+                placeholder="Email"
+                label="Email"
                 style={styles.input_style}
               />
             </FormControl>
 
             <Flex>
               <Button
-                isLoading={isSubmitting}
                 style={styles.input_button}
                 mt="10px"
-                onClick={() => router.push("/ForgotPassword")}
+                onClick={() => router.push("/Login")}
               >
-                Esqueceu sua senha?
+                Voltar?
               </Button>
 
               <Button
@@ -77,7 +73,7 @@ const Login: React.FC<LoginProps> = ({}) => {
                 variantColor="green"
                 mt="10px"
               >
-                Login
+                Enviar
               </Button>
             </Flex>
           </Form>
@@ -94,4 +90,4 @@ const Login: React.FC<LoginProps> = ({}) => {
   );
 };
 
-export default withUrqlClient(createUrqlClient)(Login);
+export default withUrqlClient(createUrqlClient)(ForgotPassword);
