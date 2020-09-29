@@ -5,8 +5,25 @@ import Layout from "../components/Layout";
 import UserCard from "./../components/UserCard";
 import NewPost from "./../components/NewPost";
 import Feed from "./../components/Feed";
+import { useRouter } from "next/router";
+import { useMeQuery } from "../generated/graphql";
 
 const Dashboard = () => {
+  const router = useRouter();
+  const [{ data, fetching }] = useMeQuery();
+
+  let Body = null;
+
+  if (fetching) {
+    // Loading data
+  } else if (!data?.me) {
+    //user not logged in
+
+    router.push("/Login");
+  } else {
+    //user is logged in
+  }
+
   const posts = [
     {
       id: 1,
@@ -167,23 +184,25 @@ const Dashboard = () => {
 
   return (
     <Layout>
-      <div className="app-container">
-        <div className="dashboard-container">
-          <div style={{ flexGrow: 1, maxWidth: "300px" }}>
-            <div>
-              <UserCard />
+      {fetching ? null : (
+        <div className="app-container">
+          <div className="dashboard-container">
+            <div style={{ flexGrow: 1, maxWidth: "300px" }}>
+              <div>
+                <UserCard data={data} />
+              </div>
             </div>
-          </div>
-          <div style={{ flexGrow: 1, maxWidth: "unset" }}>
-            <div>
-              <NewPost />
-            </div>
-            <div>
-              <Feed data={posts} />
+            <div style={{ flexGrow: 1, maxWidth: "unset" }}>
+              <div>
+                <NewPost />
+              </div>
+              <div>
+                <Feed data={posts} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </Layout>
   );
 };

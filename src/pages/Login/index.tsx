@@ -15,6 +15,7 @@ const styles = {
 };
 
 interface LoginProps {}
+
 const Login: React.FC<LoginProps> = ({}) => {
   const [, login] = useLoginMutation();
   const router = useRouter();

@@ -19,11 +19,13 @@ import { useRouter } from "next/router";
 
 const Header = () => {
   const router = useRouter();
-  const [isProfilePopoverOpen, setProfilePopover] = useState();
-  const [isNotificationPopoverOpen, setNotificationPopover] = useState();
+  const [isProfilePopoverOpen, setProfilePopover] = useState(false);
+  const [isNotificationPopoverOpen, setNotificationPopover] = useState(false);
   const [notifications, setNotifications] = useState([]);
 
-  function handleLogout() {}
+  function handleLogout() {
+    console.log("haha logout go nothing");
+  }
 
   return (
     <div className="header-container">
@@ -93,7 +95,13 @@ const Header = () => {
         >
           <div className="header-item">
             <div className="profile">
-              <NotificationsIcon className="header-icon" />
+              <Link
+                onClick={() => {
+                  setNotificationPopover(!isNotificationPopoverOpen);
+                }}
+              >
+                <NotificationsIcon className="header-icon" />
+              </Link>
             </div>
           </div>
         </Popover>
@@ -140,7 +148,13 @@ const Header = () => {
         >
           <div className="header-item">
             <div className="profile">
-              <PersonIcon className="header-icon" />
+              <Link
+                onClick={() => {
+                  setProfilePopover(!isProfilePopoverOpen);
+                }}
+              >
+                <PersonIcon className="header-icon" />
+              </Link>
             </div>
             <ArrowDropDownIcon className="popover-icon" />
           </div>

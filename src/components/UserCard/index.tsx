@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 
 import PersonIcon from "@material-ui/icons/Person";
+import { MeQuery } from "../../generated/graphql";
 
-const UserCard = () => {
+interface UserCardProps {
+  data: MeQuery;
+}
+
+const UserCard: React.FC<UserCardProps> = ({ data }) => {
   return (
     <div className="user-card">
       <div className="user-profile-pic">
         <PersonIcon className="profile-picture-icon" />
       </div>
       <div className="user-data">
-        <span className="user-name">"Sara"</span>
-        <span className="user-username">@userName</span>
+        <span className="user-name">{data?.me.name}</span>
+        <span className="user-username">@{data?.me.username}</span>
         <p className="user-bio">bio</p>
       </div>
       <div className="user-counters">

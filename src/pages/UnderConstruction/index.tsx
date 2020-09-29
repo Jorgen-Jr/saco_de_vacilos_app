@@ -6,7 +6,7 @@ import UnderConstructionAnimation from "./../../assets/animations/underconstruct
 
 import Layout from "../../components/Layout";
 
-import "./style.css";
+// import "./style.css";
 
 const UnderConstruction = () => {
   return (

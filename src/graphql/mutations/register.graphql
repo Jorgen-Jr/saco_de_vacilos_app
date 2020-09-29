@@ -16,6 +16,7 @@ mutation Register(
     user {
       id
       username
+      name
       email
       updatedAt
       createdAt

@@ -5,7 +5,7 @@ import Toast from "./../../components/Toast";
 import HomeLayout from "../../components/HomeLayout";
 import { FormInput } from "../../components/Form/FormInput";
 import { useMutation } from "urql";
-import { useRegisterMutation } from "../../generated/graphql";
+import { useMeQuery, useRegisterMutation } from "../../generated/graphql";
 import { toErrorMap } from "../../util/toErrorMap";
 
 import { useRouter } from "next/router";
@@ -69,7 +69,7 @@ const Register: React.FC<RegisterProps> = ({}) => {
                 style={styles.input_style}
               />
               <FormInput
-                name="Nome"
+                name="name"
                 placeholder="Nome"
                 label="Nome"
                 style={styles.input_style}

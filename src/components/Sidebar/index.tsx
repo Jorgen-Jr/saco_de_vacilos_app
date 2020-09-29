@@ -7,7 +7,7 @@ import SidebarItem from "./SidebarItem";
 
 // import logo from "./../../assets/image/logo.png";
 
-import { push as Menu } from "react-burger-menu";
+// import { push as Menu } from "react-burger-menu";
 
 const SourceSidebar = ({ className, items, depthStep, depth, expanded }) => {
   return (
@@ -39,12 +39,12 @@ const SourceSidebar = ({ className, items, depthStep, depth, expanded }) => {
 const Sidebar = ({ items }) => {
   return (
     <>
-      <Menu pageWrapId={"system_container"} outerContainerId={"root"}>
+      {/* <Menu pageWrapId={"system_container"} outerContainerId={"root"}>
         <SourceSidebar
           className="sidebar-container-responsible"
           items={items}
         />
-      </Menu>
+      </Menu> */}
 
       <SourceSidebar className="sidebar-container" items={items} />
     </>

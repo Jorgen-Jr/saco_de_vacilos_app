@@ -8,7 +8,7 @@ const Feed = ({ data }) => {
     <div className="dashboard-card">
       {data ? (
         data.length > 0 ? (
-          data.map((post) => <Post data={post} />)
+          data.map((post, index) => <Post key={index} data={post} />)
         ) : (
           <p>Não existem posts...</p>
         )

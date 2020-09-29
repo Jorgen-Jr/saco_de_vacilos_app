@@ -9,8 +9,11 @@ import Divider from "@material-ui/core/Divider";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import Collapse from "@material-ui/core/Collapse";
+import { useRouter } from "next/router";
 
 function SidebarItem({ depthStep = 10, depth = 0, item, ...rest }) {
+  const router = useRouter();
+
   const [collapsed, setCollapsed] = React.useState(true);
   const { label, items, Icon, onClick: onClickProp } = item;
 
