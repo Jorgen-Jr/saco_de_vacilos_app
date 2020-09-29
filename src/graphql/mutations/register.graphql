@@ -14,12 +14,7 @@ mutation Register(
       message
     }
     user {
-      id
-      username
-      name
-      email
-      updatedAt
-      createdAt
+      ...RegularUser
     }
   }
 }

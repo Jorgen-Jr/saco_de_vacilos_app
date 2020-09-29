@@ -1,8 +1,5 @@
 query Me {
   me {
-    id
-    username
-    name
-    email
+    ...RegularUser
   }
 }
