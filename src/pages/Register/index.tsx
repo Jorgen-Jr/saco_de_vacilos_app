@@ -1,14 +1,14 @@
 import { Button, FormControl } from "@chakra-ui/core";
 import { Form, Formik } from "formik";
 
-import Toast from "./../../components/Toast";
 import HomeLayout from "../../components/HomeLayout";
 import { FormInput } from "../../components/Form/FormInput";
-import { useMutation } from "urql";
-import { useMeQuery, useRegisterMutation } from "../../generated/graphql";
+import { useRegisterMutation } from "../../generated/graphql";
 import { toErrorMap } from "../../util/toErrorMap";
 
 import { useRouter } from "next/router";
+import { withUrqlClient } from "next-urql";
+import { createUrqlClient } from "../../util/createUrqlClient";
 
 const styles = {
   input_style: { borderRadius: "30px" },
@@ -99,4 +99,4 @@ const Register: React.FC<RegisterProps> = ({}) => {
   );
 };
 
-export default Register;
+export default withUrqlClient(createUrqlClient)(Register);

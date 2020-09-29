@@ -8,6 +8,8 @@ import { toErrorMap } from "../../util/toErrorMap";
 import { useRouter } from "next/router";
 import { useLoginMutation } from "../../generated/graphql";
 import { Link } from "@chakra-ui/core";
+import { createUrqlClient } from "../../util/createUrqlClient";
+import { withUrqlClient } from "next-urql";
 
 const styles = {
   input_style: { borderRadius: "30px" },
@@ -97,4 +99,4 @@ const Login: React.FC<LoginProps> = ({}) => {
   );
 };
 
-export default Login;
+export default withUrqlClient(createUrqlClient)(Login);

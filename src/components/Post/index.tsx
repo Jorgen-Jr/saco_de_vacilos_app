@@ -25,18 +25,18 @@ const Post = ({ data }) => {
         <div className="post-content">
           <div className="post-header">
             <h1>
-              {data.author.name} {data.author.profile.surname}
-              <span className="post-username">@{data.author.username}</span>
+              {/* {data.author.name} {data.author.profile.surname}
+              <span className="post-username">@{data.author.username}</span> */}
             </h1>
             <div className="created-at">
               <AccessTimeIcon className="created-at-icon" />
-              <span>
+              {/* <span>
                 {convertToDate(data.createdAt).toLocaleDateString("pt-BR") +
                   " " +
                   convertToDate(data.createdAt).getHours() +
                   ":" +
                   convertToDate(data.createdAt).getMinutes()}
-              </span>
+              </span> */}
             </div>
           </div>
           <p className="post-content-text">{data.content}</p>
@@ -65,7 +65,7 @@ const Post = ({ data }) => {
           <div className="post-btn">
             <span className="btn-icon">
               <CommentIcon className="btn-icon-icon" />{" "}
-              <span>{data.comments.length}</span>
+              {/* <span>{data.comments.length}</span> */}
             </span>
           </div>
         </div>

@@ -5,23 +5,28 @@ import Layout from "../components/Layout";
 import UserCard from "./../components/UserCard";
 import NewPost from "./../components/NewPost";
 import Feed from "./../components/Feed";
-import { useRouter } from "next/router";
 import { useMeQuery } from "../generated/graphql";
 import { usePostsQuery } from "../generated/graphql";
 import { withUrqlClient } from "next-urql";
 
 import { createUrqlClient } from "./../util/createUrqlClient";
+import Login from "./Login";
+import { isServer } from "../util/isServer";
+import { useRouter } from "next/router";
 
 const Dashboard = () => {
-  const router = useRouter();
-  const [{ data, fetching }] = useMeQuery();
+  const [{ data, fetching }] = useMeQuery({
+    pause: isServer(),
+  });
   const [postData] = usePostsQuery();
 
   if (fetching) {
     // Loading data
   } else if (!data?.me) {
     //user not logged in
-    // router.push("/Login");
+    if (!isServer()) {
+      return <Login />;
+    }
   } else {
     //user is logged in
   }
@@ -187,27 +192,29 @@ const Dashboard = () => {
   console.log(postData);
 
   return (
-    <Layout>
+    <>
       {fetching ? null : (
-        <div className="app-container">
-          <div className="dashboard-container">
-            <div style={{ flexGrow: 1, maxWidth: "300px" }}>
-              <div>
-                <UserCard data={data} />
+        <Layout>
+          <div className="app-container">
+            <div className="dashboard-container">
+              <div style={{ flexGrow: 1, maxWidth: "300px" }}>
+                <div>
+                  <UserCard data={data} />
+                </div>
               </div>
-            </div>
-            <div style={{ flexGrow: 1, maxWidth: "unset" }}>
-              <div>
-                <NewPost />
-              </div>
-              <div>
-                <Feed data={postData.data.posts} />
+              <div style={{ flexGrow: 1, maxWidth: "unset" }}>
+                <div>
+                  <NewPost />
+                </div>
+                <div>
+                  <Feed data={postData.data.posts} />
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </Layout>
       )}
-    </Layout>
+    </>
   );
 };
 
