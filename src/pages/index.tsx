@@ -189,8 +189,6 @@ const Dashboard = () => {
     },
   ];
 
-  console.log(postData);
-
   return (
     <>
       {fetching ? null : (
