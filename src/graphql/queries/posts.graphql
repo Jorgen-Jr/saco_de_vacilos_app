@@ -1,0 +1,15 @@
+query Posts {
+  posts {
+    id
+    content
+    deserved_count
+    undeserved_count
+    author {
+      id
+    }
+    guilty {
+      id
+    }
+    status
+  }
+}

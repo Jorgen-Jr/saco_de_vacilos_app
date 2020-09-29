@@ -7,17 +7,21 @@ import NewPost from "./../components/NewPost";
 import Feed from "./../components/Feed";
 import { useRouter } from "next/router";
 import { useMeQuery } from "../generated/graphql";
+import { usePostsQuery } from "../generated/graphql";
+import { withUrqlClient } from "next-urql";
+
+import { createUrqlClient } from "./../util/createUrqlClient";
 
 const Dashboard = () => {
   const router = useRouter();
   const [{ data, fetching }] = useMeQuery();
+  const [postData] = usePostsQuery();
 
   if (fetching) {
     // Loading data
   } else if (!data?.me) {
     //user not logged in
-
-    router.push("/Login");
+    // router.push("/Login");
   } else {
     //user is logged in
   }
@@ -180,6 +184,8 @@ const Dashboard = () => {
     },
   ];
 
+  console.log(postData);
+
   return (
     <Layout>
       {fetching ? null : (
@@ -195,7 +201,7 @@ const Dashboard = () => {
                 <NewPost />
               </div>
               <div>
-                <Feed data={posts} />
+                <Feed data={postData.data.posts} />
               </div>
             </div>
           </div>
@@ -205,4 +211,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default withUrqlClient(createUrqlClient, { ssr: true })(Dashboard);

@@ -191,7 +191,6 @@ export type MutationCreatePostArgs = {
   initial_balance: Scalars['Float'];
   content: Scalars['String'];
   guilty: Scalars['Float'];
-  author: Scalars['Float'];
 };
 
 
@@ -316,6 +315,24 @@ export type MeQuery = (
   )> }
 );
 
+export type PostsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PostsQuery = (
+  { __typename?: 'Query' }
+  & { posts: Array<(
+    { __typename?: 'Post' }
+    & Pick<Post, 'id' | 'content' | 'deserved_count' | 'undeserved_count' | 'status'>
+    & { author: (
+      { __typename?: 'User' }
+      & Pick<User, 'id'>
+    ), guilty: (
+      { __typename?: 'User' }
+      & Pick<User, 'id'>
+    ) }
+  )> }
+);
+
 export const RegularUserFragmentDoc = gql`
     fragment RegularUser on User {
   id
@@ -379,4 +396,25 @@ export const MeDocument = gql`
 
 export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
+};
+export const PostsDocument = gql`
+    query Posts {
+  posts {
+    id
+    content
+    deserved_count
+    undeserved_count
+    author {
+      id
+    }
+    guilty {
+      id
+    }
+    status
+  }
+}
+    `;
+
+export function usePostsQuery(options: Omit<Urql.UseQueryArgs<PostsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<PostsQuery>({ query: PostsDocument, ...options });
 };
