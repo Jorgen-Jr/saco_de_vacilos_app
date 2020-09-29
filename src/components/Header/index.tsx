@@ -16,6 +16,7 @@ import Popover, { ArrowContainer } from "react-tiny-popover";
 
 import NotificationItem from "./NotificationItem";
 import { useRouter } from "next/router";
+import { useLogoutMutation } from "../../generated/graphql";
 
 const Header = () => {
   const router = useRouter();
@@ -23,8 +24,10 @@ const Header = () => {
   const [isNotificationPopoverOpen, setNotificationPopover] = useState(false);
   const [notifications, setNotifications] = useState([]);
 
+  const [{ fetching }, logout] = useLogoutMutation();
+
   function handleLogout() {
-    console.log("haha logout go nothing");
+    logout();
   }
 
   return (
@@ -94,15 +97,15 @@ const Header = () => {
           )}
         >
           <div className="header-item">
-            <div className="profile">
-              <Link
-                onClick={() => {
-                  setNotificationPopover(!isNotificationPopoverOpen);
-                }}
-              >
+            <Link
+              onClick={() => {
+                setNotificationPopover(!isNotificationPopoverOpen);
+              }}
+            >
+              <div className="profile">
                 <NotificationsIcon className="header-icon" />
-              </Link>
-            </div>
+              </div>
+            </Link>
           </div>
         </Popover>
 
@@ -137,6 +140,7 @@ const Header = () => {
                   <button
                     className="btn-popover btn-logout"
                     onClick={handleLogout}
+                    disabled={fetching}
                   >
                     <CancelIcon />
                     Sair
@@ -147,15 +151,15 @@ const Header = () => {
           )}
         >
           <div className="header-item">
-            <div className="profile">
-              <Link
-                onClick={() => {
-                  setProfilePopover(!isProfilePopoverOpen);
-                }}
-              >
+            <Link
+              onClick={() => {
+                setProfilePopover(!isProfilePopoverOpen);
+              }}
+            >
+              <div className="profile">
                 <PersonIcon className="header-icon" />
-              </Link>
-            </div>
+              </div>
+            </Link>
             <ArrowDropDownIcon className="popover-icon" />
           </div>
         </Popover>

@@ -14,8 +14,8 @@ const UserCard: React.FC<UserCardProps> = ({ data }) => {
         <PersonIcon className="profile-picture-icon" />
       </div>
       <div className="user-data">
-        <span className="user-name">{data?.me.name}</span>
-        <span className="user-username">@{data?.me.username}</span>
+        <span className="user-name">{data?.me?.name}</span>
+        <span className="user-username">@{data?.me?.username}</span>
         <p className="user-bio">bio</p>
       </div>
       <div className="user-counters">

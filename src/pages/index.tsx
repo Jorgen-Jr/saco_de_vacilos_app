@@ -12,8 +12,6 @@ const Dashboard = () => {
   const router = useRouter();
   const [{ data, fetching }] = useMeQuery();
 
-  let Body = null;
-
   if (fetching) {
     // Loading data
   } else if (!data?.me) {
