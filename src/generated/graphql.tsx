@@ -388,7 +388,14 @@ export type PostsQuery = (
   { __typename?: 'Query' }
   & { posts: Array<(
     { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'content' | 'deserved_count' | 'undeserved_count' | 'authorId' | 'guiltyId' | 'status'>
+    & Pick<Post, 'id' | 'content' | 'deserved_count' | 'undeserved_count' | 'authorId' | 'guiltyId' | 'initial_balance' | 'status' | 'createdAt' | 'updatedAt'>
+    & { author: (
+      { __typename?: 'User' }
+      & Pick<User, 'username' | 'name'>
+    ), guilty: (
+      { __typename?: 'User' }
+      & Pick<User, 'username' | 'name'>
+    ) }
   )> }
 );
 
@@ -513,7 +520,18 @@ export const PostsDocument = gql`
     undeserved_count
     authorId
     guiltyId
+    initial_balance
     status
+    author {
+      username
+      name
+    }
+    guilty {
+      username
+      name
+    }
+    createdAt
+    updatedAt
   }
 }
     `;

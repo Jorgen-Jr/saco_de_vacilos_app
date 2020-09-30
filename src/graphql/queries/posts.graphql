@@ -6,12 +6,17 @@ query Posts {
     undeserved_count
     authorId
     guiltyId
-    # author {
-    #   id
-    # }
-    # guilty {
-    #   id
-    # }
+    initial_balance
     status
+    author {
+      username
+      name
+    }
+    guilty {
+      username
+      name
+    }
+    createdAt
+    updatedAt
   }
 }
