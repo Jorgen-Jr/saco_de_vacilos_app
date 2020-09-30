@@ -58,16 +58,12 @@ const NewPost = () => {
 
         <Formik
           initialValues={{ content: "", initial_balance: 5 }}
-          onSubmit={async (values, { setErrors }) => {
+          onSubmit={async (values) => {
             console.log(values);
 
-            const response = await createPost({ input: values });
-            if (!response.data?.createPost.id) {
-              // console.log(toErrorMap(response.data.createPost.errors));
-              // setErrors(toErrorMap(response.data.createPost.errors));
-
-              console.log("post criado :", response.data);
-            } else {
+            const { error } = await createPost({ input: values });
+            if (!error) {
+              console.log("post criado!");
               // router.push("/");
             }
           }}

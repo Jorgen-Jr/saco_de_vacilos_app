@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import Lottie from "react-lottie";
 
-import NotFoundAnimation from "./../../assets/animations/notfound.json";
+import NotFoundAnimation from "../../assets/animations/notfound.json";
 
 import Layout from "../../components/Layout";
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-import api from "./../../services/api";
+import api from "../../services/api";
 
 // import { Container } from './styles';
 import Layout from "../../components/Layout";

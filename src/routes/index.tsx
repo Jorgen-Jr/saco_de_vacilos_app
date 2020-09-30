@@ -7,13 +7,13 @@ import { toast } from "react-toastify";
 
 // import history from "../../history";
 
-import NotFound from "../pages/NotFound";
-import UnderConstruction from "../pages/UnderConstruction";
+import NotFound from "../pages/notfound";
+import UnderConstruction from "../pages/underconstruction";
 import Dashboard from "../pages/Dashboard";
 //Usuários
-import Login from "../pages/Login";
-import Users from "../pages/Administrator/Users";
-import User from "../pages/User";
+import Login from "../pages/login";
+import Users from "../pages/administrator/Users";
+import User from "../pages/user";
 
 import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 

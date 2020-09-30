@@ -65,7 +65,7 @@ const Login: React.FC<LoginProps> = ({}) => {
                 isLoading={isSubmitting}
                 style={styles.input_button}
                 mt="10px"
-                onClick={() => router.push("/ForgotPassword")}
+                onClick={() => router.push("/forgotpassword")}
               >
                 Esqueceu sua senha?
               </Button>
@@ -87,7 +87,7 @@ const Login: React.FC<LoginProps> = ({}) => {
       <div className="new-user">
         <p>
           Não possui Conta? Se registre em{" "}
-          <Link onClick={() => router.push("/Register")}>Cadastro</Link>
+          <Link onClick={() => router.push("/register")}>Cadastro</Link>
         </p>
       </div>
     </HomeLayout>

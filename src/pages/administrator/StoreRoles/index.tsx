@@ -6,7 +6,7 @@ import "./style.css";
 
 import Layout from "../../../components/Layout";
 
-import api from "./../../../services/api";
+import api from "../../../services/api";
 
 import Table from "../../../components/Table";
 import * as TableActions from "../../../../store/actions/table";

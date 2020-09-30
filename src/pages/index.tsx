@@ -10,7 +10,7 @@ import { usePostsQuery } from "../generated/graphql";
 import { withUrqlClient } from "next-urql";
 
 import { createUrqlClient } from "./../util/createUrqlClient";
-import Login from "./Login";
+import Login from "./login";
 import { isServer } from "../util/isServer";
 import { useRouter } from "next/router";
 

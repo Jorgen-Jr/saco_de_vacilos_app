@@ -1,6 +1,6 @@
 import React from "react";
 
-import Lottie from "react-lottie";
+import Lottie from "../../pages/notfound/node_modules/react-lottie";
 
 import "./style.css";
 
