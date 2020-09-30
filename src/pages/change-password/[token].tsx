@@ -18,7 +18,7 @@ const styles = {
   input_button: { borderRadius: "30px" },
 };
 
-const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
+const ChangePassword: NextPage<{ token: string }> = () => {
   const [, changePassword] = useChangePasswordMutation();
   const router = useRouter();
 
@@ -46,7 +46,8 @@ const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
             );
           }
           const response = await changePassword({
-            token: token,
+            token:
+              typeof router.query.token == "string" ? router.query.token : "",
             password: values.password,
           });
           if (response.data?.changePassword.errors) {
@@ -95,12 +96,6 @@ const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
       </Formik>
     </HomeLayout>
   );
-};
-
-ChangePassword.getInitialProps = ({ query }) => {
-  return {
-    token: query.token as string,
-  };
 };
 
 export default withUrqlClient(createUrqlClient)(ChangePassword);

@@ -1,5 +1,5 @@
 import { cacheExchange } from "@urql/exchange-graphcache";
-import { useRouter } from "next/router";
+import Router from "next/router";
 import { dedupExchange, Exchange, fetchExchange } from "urql";
 import { pipe, tap } from "wonka";
 import {
@@ -13,14 +13,13 @@ import {
 import { betterUpdateQuery } from "./betterUpdateQuery";
 
 export const errorExchange: Exchange = ({ forward }) => (ops$) => {
-  const router = useRouter();
   return pipe(
     forward(ops$),
     tap(({ error }) => {
       // If the OperationResult has an error send a request to sentry
       if (error) {
         if (error.message.includes("not logged in")) {
-          router.replace("/login");
+          Router.replace("/login");
         }
       }
     })
