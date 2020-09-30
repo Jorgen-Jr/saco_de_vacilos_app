@@ -16,26 +16,21 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  hello: Scalars['String'];
-  me?: Maybe<User>;
-  users: Array<User>;
-  user?: Maybe<User>;
   indexfollowingrelationship: Array<FollowingRelationship>;
   following?: Maybe<FollowingRelationship>;
   followers?: Maybe<Array<FollowingRelationship>>;
+  hello: Scalars['String'];
   posts: Array<Post>;
   post?: Maybe<Post>;
   postsByAuthor: Array<Post>;
   postUserActions: Array<PostUserAction>;
   postUserAction?: Maybe<PostUserAction>;
   userActionByPost: Array<PostUserAction>;
+  me?: Maybe<User>;
+  users: Array<User>;
+  user?: Maybe<User>;
   usersProfile: Array<UserSettings>;
   userProfile?: Maybe<UserSettings>;
-};
-
-
-export type QueryUserArgs = {
-  identifier: Scalars['Int'];
 };
 
 
@@ -69,8 +64,22 @@ export type QueryUserActionByPostArgs = {
 };
 
 
+export type QueryUserArgs = {
+  identifier: Scalars['Int'];
+};
+
+
 export type QueryUserProfileArgs = {
   identifier: Scalars['Int'];
+};
+
+export type FollowingRelationship = {
+  __typename?: 'FollowingRelationship';
+  id: Scalars['String'];
+  user: User;
+  following: User;
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
 };
 
 export type User = {
@@ -82,17 +91,10 @@ export type User = {
   active: Scalars['Boolean'];
   createdAt: Scalars['DateTime'];
   updatedAt: Scalars['DateTime'];
+  posts: Array<Post>;
+  guiltyPosts: Array<Post>;
 };
 
-
-export type FollowingRelationship = {
-  __typename?: 'FollowingRelationship';
-  id: Scalars['String'];
-  user: User;
-  following: User;
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-};
 
 export type Post = {
   __typename?: 'Post';
@@ -103,10 +105,13 @@ export type Post = {
   undeserved_count: Scalars['Float'];
   view_count: Scalars['Float'];
   status: Scalars['String'];
+  active: Scalars['Boolean'];
+  authorId: Scalars['Float'];
+  author: User;
+  guiltyId: Scalars['Float'];
+  guilty: User;
   createdAt: Scalars['DateTime'];
   updatedAt: Scalars['DateTime'];
-  author: User;
-  guilty: User;
 };
 
 export type PostUserAction = {
@@ -132,13 +137,6 @@ export type UserSettings = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  register: UserResponse;
-  login: UserResponse;
-  updateUser?: Maybe<User>;
-  deleteUser: Scalars['Boolean'];
-  logout: Scalars['Boolean'];
-  forgotPassword: UserResponse;
-  changePassword: UserResponse;
   follow: FollowingRelationship;
   unfollow: Scalars['Boolean'];
   createPost: Post;
@@ -146,8 +144,56 @@ export type Mutation = {
   deletePost: Scalars['Boolean'];
   createUserAction: PostUserAction;
   deleteUserAction: Scalars['Boolean'];
+  register: UserResponse;
+  login: UserResponse;
+  updateUser?: Maybe<User>;
+  deleteUser: Scalars['Boolean'];
+  logout: Scalars['Boolean'];
+  forgotPassword: UserResponse;
+  changePassword: UserResponse;
   createUserSettings: UserSettings;
   updateUserSettings?: Maybe<UserSettings>;
+};
+
+
+export type MutationFollowArgs = {
+  follow: Scalars['Float'];
+  user: Scalars['Float'];
+};
+
+
+export type MutationUnfollowArgs = {
+  identifier: Scalars['Float'];
+};
+
+
+export type MutationCreatePostArgs = {
+  guilty?: Maybe<Scalars['Float']>;
+  input: PostInput;
+};
+
+
+export type MutationUpdatePostArgs = {
+  undeserved_count: Scalars['Float'];
+  deserve_count: Scalars['Float'];
+  content: Scalars['String'];
+  identifier: Scalars['Float'];
+};
+
+
+export type MutationDeletePostArgs = {
+  identifier: Scalars['Float'];
+};
+
+
+export type MutationCreateUserActionArgs = {
+  action: Scalars['String'];
+  post: Scalars['Float'];
+};
+
+
+export type MutationDeleteUserActionArgs = {
+  identifier: Scalars['Float'];
 };
 
 
@@ -187,50 +233,6 @@ export type MutationChangePasswordArgs = {
 };
 
 
-export type MutationFollowArgs = {
-  follow: Scalars['Float'];
-  user: Scalars['Float'];
-};
-
-
-export type MutationUnfollowArgs = {
-  following: Scalars['Float'];
-  user: Scalars['Float'];
-};
-
-
-export type MutationCreatePostArgs = {
-  initial_balance: Scalars['Float'];
-  content: Scalars['String'];
-  guilty: Scalars['Float'];
-};
-
-
-export type MutationUpdatePostArgs = {
-  undeserved_count: Scalars['Float'];
-  deserve_count: Scalars['Float'];
-  content: Scalars['String'];
-  identifier: Scalars['Float'];
-};
-
-
-export type MutationDeletePostArgs = {
-  identifier: Scalars['Float'];
-};
-
-
-export type MutationCreateUserActionArgs = {
-  action: Scalars['String'];
-  post: Scalars['Float'];
-  author: Scalars['Float'];
-};
-
-
-export type MutationDeleteUserActionArgs = {
-  identifier: Scalars['Float'];
-};
-
-
 export type MutationCreateUserSettingsArgs = {
   notification_mentions: Scalars['Boolean'];
   notification_follower: Scalars['Boolean'];
@@ -243,6 +245,11 @@ export type MutationUpdateUserSettingsArgs = {
   notification_follower?: Maybe<Scalars['Boolean']>;
   notification_comments?: Maybe<Scalars['Boolean']>;
   user_id: Scalars['Float'];
+};
+
+export type PostInput = {
+  content: Scalars['String'];
+  initial_balance: Scalars['Float'];
 };
 
 export type UserResponse = {
@@ -296,6 +303,19 @@ export type ChangePasswordMutation = (
   & { changePassword: (
     { __typename?: 'UserResponse' }
     & RegularUserResponseFragment
+  ) }
+);
+
+export type CreatePostMutationVariables = Exact<{
+  input: PostInput;
+}>;
+
+
+export type CreatePostMutation = (
+  { __typename?: 'Mutation' }
+  & { createPost: (
+    { __typename?: 'Post' }
+    & Pick<Post, 'id' | 'content' | 'initial_balance' | 'deserved_count' | 'undeserved_count' | 'view_count' | 'status' | 'authorId'>
   ) }
 );
 
@@ -368,14 +388,7 @@ export type PostsQuery = (
   { __typename?: 'Query' }
   & { posts: Array<(
     { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'content' | 'deserved_count' | 'undeserved_count' | 'status'>
-    & { author: (
-      { __typename?: 'User' }
-      & Pick<User, 'id'>
-    ), guilty: (
-      { __typename?: 'User' }
-      & Pick<User, 'id'>
-    ) }
+    & Pick<Post, 'id' | 'content' | 'deserved_count' | 'undeserved_count' | 'authorId' | 'guiltyId' | 'status'>
   )> }
 );
 
@@ -416,6 +429,24 @@ export const ChangePasswordDocument = gql`
 
 export function useChangePasswordMutation() {
   return Urql.useMutation<ChangePasswordMutation, ChangePasswordMutationVariables>(ChangePasswordDocument);
+};
+export const CreatePostDocument = gql`
+    mutation createPost($input: PostInput!) {
+  createPost(input: $input) {
+    id
+    content
+    initial_balance
+    deserved_count
+    undeserved_count
+    view_count
+    status
+    authorId
+  }
+}
+    `;
+
+export function useCreatePostMutation() {
+  return Urql.useMutation<CreatePostMutation, CreatePostMutationVariables>(CreatePostDocument);
 };
 export const ForgotPasswordDocument = gql`
     mutation ForgotPassword($email: String!) {
@@ -480,12 +511,8 @@ export const PostsDocument = gql`
     content
     deserved_count
     undeserved_count
-    author {
-      id
-    }
-    guilty {
-      id
-    }
+    authorId
+    guiltyId
     status
   }
 }

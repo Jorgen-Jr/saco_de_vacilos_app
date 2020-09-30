@@ -18,6 +18,7 @@ const Dashboard = () => {
   const [{ data, fetching }] = useMeQuery({
     pause: isServer(),
   });
+
   const [postData] = usePostsQuery();
 
   if (fetching) {
@@ -205,7 +206,7 @@ const Dashboard = () => {
                   <NewPost />
                 </div>
                 <div>
-                  <Feed data={postData.data.posts} />
+                  <Feed data={postData.data?.posts} />
                 </div>
               </div>
             </div>

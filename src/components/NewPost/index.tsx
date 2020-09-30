@@ -3,6 +3,12 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 import PersonIcon from "@material-ui/icons/Person";
 import SendIcon from "@material-ui/icons/Send";
+import { Form, Formik, getIn } from "formik";
+import { toErrorMap } from "../../util/toErrorMap";
+
+import { FormInput } from "../Form/FormInput";
+import { Button, FormControl } from "@material-ui/core";
+import { useCreatePostMutation } from "../../generated/graphql";
 
 const PrettoSlider = withStyles({
   root: {
@@ -35,12 +41,7 @@ const PrettoSlider = withStyles({
 })(Slider);
 
 const NewPost = () => {
-  const [content, setContent] = useState("");
-  const [initial_balance, setInitialBalance] = useState(5);
-
-  async function handleSend() {
-    console.log(content, initial_balance);
-  }
+  const [, createPost] = useCreatePostMutation();
 
   function auto_grow(event) {
     let element = document.getElementById(event.currentTarget.id);
@@ -54,32 +55,63 @@ const NewPost = () => {
         <div className="post-profile-pic">
           <PersonIcon className="post-picture-icon" />
         </div>
-        <textarea
-          id="new_post_input"
-          onChange={(event) => setContent(event.target.value)}
-          onInput={(event) => auto_grow(event)}
-          placeholder="Qual foi seu vacilo de hoje?"
-          className="new-post-input"
-        />
-      </div>
-      <div className="post-slider">
-        <span>Quanto pesa esse vacilo?</span>
-        {/* TODO */}
-        {/* <PrettoSlider
-          onChange={event => setInitialBalance(event.currentTarget.innerText)}
-          scale={(x) => (x / 10).toFixed(0)}
-          valueLabelDisplay="auto"
-          aria-label="Valor"
-          defaultValue={50}
-        /> */}
-      </div>
-      <div className="new-post-btn-group">
-        <div className="popover-btn-group">
-          <button className="btn-send" onClick={handleSend}>
-            Enviar
-            <SendIcon />
-          </button>
-        </div>
+
+        <Formik
+          initialValues={{ content: "", initial_balance: 5 }}
+          onSubmit={async (values, { setErrors }) => {
+            console.log(values);
+
+            const response = await createPost({ input: values });
+            if (!response.data?.createPost.id) {
+              // console.log(toErrorMap(response.data.createPost.errors));
+              // setErrors(toErrorMap(response.data.createPost.errors));
+
+              console.log("post criado :", response.data);
+            } else {
+              // router.push("/");
+            }
+          }}
+        >
+          {({ isSubmitting }) => (
+            <Form>
+              <div>
+                <FormInput
+                  textarea={true}
+                  id="new_post_input"
+                  onInput={(event) => auto_grow(event)}
+                  placeholder="Qual foi seu vacilo de hoje?"
+                  className="new-post-input"
+                  name="content"
+                  label=""
+                />
+              </div>
+
+              {/* <div className="post-slider">
+                <span>Quanto pesa esse vacilo?</span>
+                <PrettoSlider
+                  name="initial_balance"
+                  onChange={(event) =>
+                    setInitialBalance(event.currentTarget.innerText)
+                  }
+                  scale={(x) => x / 10}
+                  valueLabelDisplay="auto"
+                  aria-label="Valor"
+                  defaultValue={50}
+                />
+              </div> */}
+              <div className="new-post-btn-group">
+                <div className="popover-btn-group">
+                  {isSubmitting ? null : (
+                    <button className="btn-send" type="submit">
+                      Enviar
+                      <SendIcon />
+                    </button>
+                  )}
+                </div>
+              </div>
+            </Form>
+          )}
+        </Formik>
       </div>
     </div>
   );

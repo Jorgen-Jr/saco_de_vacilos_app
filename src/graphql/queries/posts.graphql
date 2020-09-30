@@ -4,12 +4,14 @@ query Posts {
     content
     deserved_count
     undeserved_count
-    author {
-      id
-    }
-    guilty {
-      id
-    }
+    authorId
+    guiltyId
+    # author {
+    #   id
+    # }
+    # guilty {
+    #   id
+    # }
     status
   }
 }

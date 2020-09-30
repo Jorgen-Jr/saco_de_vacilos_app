@@ -1,0 +1,12 @@
+mutation createPost($input: PostInput!) {
+  createPost(input: $input) {
+    id
+    content
+    initial_balance
+    deserved_count
+    undeserved_count
+    view_count
+    status
+    authorId
+  }
+}
