@@ -5,21 +5,23 @@ import Layout from "../components/Layout";
 import UserCard from "./../components/UserCard";
 import NewPost from "./../components/NewPost";
 import Feed from "./../components/Feed";
-import { useMeQuery } from "../generated/graphql";
-import { usePostsQuery } from "../generated/graphql";
+import { useFeedQuery, useMeQuery } from "../generated/graphql";
 import { withUrqlClient } from "next-urql";
 
 import { createUrqlClient } from "./../util/createUrqlClient";
 import Login from "./login";
 import { isServer } from "../util/isServer";
-import { useRouter } from "next/router";
 
 const Dashboard = () => {
   const [{ data, fetching }] = useMeQuery({
     pause: isServer(),
   });
 
-  const [postData] = usePostsQuery();
+  const [postData] = useFeedQuery({
+    variables: {
+      limit: 10,
+    },
+  });
 
   if (fetching) {
     // Loading data
@@ -206,7 +208,7 @@ const Dashboard = () => {
                   <NewPost />
                 </div>
                 <div>
-                  <Feed data={postData.data?.posts} />
+                  <Feed data={postData.data?.feed} />
                 </div>
               </div>
             </div>

@@ -1,0 +1,18 @@
+query Feed($limit: Int!, $cursor: String) {
+  feed(limit: $limit, cursor: $cursor) {
+    id
+    content
+    deserved_count
+    undeserved_count
+    authorId
+    guiltyId
+    initial_balance
+    status
+    createdAt
+    updatedAt
+    author {
+      username
+      name
+    }
+  }
+}

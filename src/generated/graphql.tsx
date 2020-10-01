@@ -21,6 +21,7 @@ export type Query = {
   followers?: Maybe<Array<FollowingRelationship>>;
   hello: Scalars['String'];
   posts: Array<Post>;
+  feed: Array<Post>;
   post?: Maybe<Post>;
   postsByAuthor: Array<Post>;
   postUserActions: Array<PostUserAction>;
@@ -41,6 +42,12 @@ export type QueryFollowingArgs = {
 
 export type QueryFollowersArgs = {
   user: Scalars['Int'];
+};
+
+
+export type QueryFeedArgs = {
+  cursor?: Maybe<Scalars['String']>;
+  limit: Scalars['Int'];
 };
 
 
@@ -370,6 +377,24 @@ export type RegisterMutation = (
   ) }
 );
 
+export type FeedQueryVariables = Exact<{
+  limit: Scalars['Int'];
+  cursor?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FeedQuery = (
+  { __typename?: 'Query' }
+  & { feed: Array<(
+    { __typename?: 'Post' }
+    & Pick<Post, 'id' | 'content' | 'deserved_count' | 'undeserved_count' | 'authorId' | 'guiltyId' | 'initial_balance' | 'status' | 'createdAt' | 'updatedAt'>
+    & { author: (
+      { __typename?: 'User' }
+      & Pick<User, 'username' | 'name'>
+    ) }
+  )> }
+);
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -499,6 +524,30 @@ export const RegisterDocument = gql`
 
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
+};
+export const FeedDocument = gql`
+    query Feed($limit: Int!, $cursor: String) {
+  feed(limit: $limit, cursor: $cursor) {
+    id
+    content
+    deserved_count
+    undeserved_count
+    authorId
+    guiltyId
+    initial_balance
+    status
+    createdAt
+    updatedAt
+    author {
+      username
+      name
+    }
+  }
+}
+    `;
+
+export function useFeedQuery(options: Omit<Urql.UseQueryArgs<FeedQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<FeedQuery>({ query: FeedDocument, ...options });
 };
 export const MeDocument = gql`
     query Me {
