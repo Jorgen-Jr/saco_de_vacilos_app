@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Layout from "../components/Layout";
 
@@ -11,15 +11,21 @@ import { withUrqlClient } from "next-urql";
 import { createUrqlClient } from "./../util/createUrqlClient";
 import Login from "./login";
 import { isServer } from "../util/isServer";
+import { Flex, Button } from "@chakra-ui/core";
 
 const Dashboard = () => {
+  const [pagination, setPagination] = useState({
+    limit: 10,
+    cursor: null as null | string,
+  });
+
   const [{ data, fetching }] = useMeQuery({
     pause: isServer(),
   });
 
   const [postData] = useFeedQuery({
     variables: {
-      limit: 10,
+      ...pagination,
     },
   });
 
@@ -192,6 +198,14 @@ const Dashboard = () => {
     },
   ];
 
+  if (!postData.fetching && !postData.data) {
+    return (
+      <div>
+        <div>you got query failed for some reason</div>
+      </div>
+    );
+  }
+
   return (
     <>
       {fetching ? null : (
@@ -208,7 +222,29 @@ const Dashboard = () => {
                   <NewPost />
                 </div>
                 <div>
-                  <Feed data={postData.data?.feed} />
+                  {postData.fetching && !postData.data ? (
+                    <h1>Carregando...</h1>
+                  ) : (
+                    <Feed data={postData.data?.feed} />
+                  )}
+                  {postData.data ? (
+                    <Flex>
+                      <Button
+                        m="auto"
+                        my={8}
+                        onClick={() =>
+                          setPagination({
+                            limit: pagination.limit,
+                            cursor:
+                              postData.data.feed[postData.data.feed.length - 1]
+                                .createdAt,
+                          })
+                        }
+                      >
+                        Carregar mais
+                      </Button>
+                    </Flex>
+                  ) : null}
                 </div>
               </div>
             </div>

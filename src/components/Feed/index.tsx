@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import PersonIcon from "@material-ui/icons/Person";
+import React from "react";
 
 import Post from "../Post";
 
@@ -8,7 +7,7 @@ const Feed = ({ data }) => {
     <div className="dashboard-card">
       {data ? (
         data.length > 0 ? (
-          data.map((post, index) => <Post key={index} data={post} />)
+          data.map((post) => <Post key={post.id} data={post} />)
         ) : (
           <p>Não existem posts...</p>
         )

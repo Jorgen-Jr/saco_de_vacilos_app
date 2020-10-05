@@ -14,8 +14,6 @@ const Post = ({ data }) => {
   async function handleUndeserveClick() {}
   async function handleCommentClick() {}
 
-  console.log(data);
-
   return (
     <div className="post-container">
       <div className="post-author-pic">
