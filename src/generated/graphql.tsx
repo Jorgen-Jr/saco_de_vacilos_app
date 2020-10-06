@@ -390,7 +390,7 @@ export type FeedQuery = (
     & Pick<Post, 'id' | 'content' | 'deserved_count' | 'undeserved_count' | 'authorId' | 'guiltyId' | 'initial_balance' | 'status' | 'createdAt' | 'updatedAt'>
     & { author: (
       { __typename?: 'User' }
-      & Pick<User, 'username' | 'name'>
+      & Pick<User, 'id' | 'username' | 'name'>
     ) }
   )> }
 );
@@ -539,6 +539,7 @@ export const FeedDocument = gql`
     createdAt
     updatedAt
     author {
+      id
       username
       name
     }

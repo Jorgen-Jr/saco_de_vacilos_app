@@ -11,6 +11,7 @@ query Feed($limit: Int!, $cursor: String) {
     createdAt
     updatedAt
     author {
+      id
       username
       name
     }

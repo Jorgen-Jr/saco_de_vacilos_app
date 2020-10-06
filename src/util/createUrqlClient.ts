@@ -1,6 +1,11 @@
 import { cacheExchange, Resolver } from "@urql/exchange-graphcache";
 import Router from "next/router";
-import { dedupExchange, Exchange, fetchExchange } from "urql";
+import {
+  dedupExchange,
+  Exchange,
+  fetchExchange,
+  stringifyVariables,
+} from "urql";
 import { pipe, tap } from "wonka";
 import {
   ChangePasswordMutation,
@@ -37,7 +42,16 @@ export const cursorPagination = (): Resolver => {
       return undefined;
     }
 
+    const fieldKey = `${fieldName}(${stringifyVariables(fieldArgs)})`;
+
+    const isitInTheCache = cache.resolveFieldByKey(entityKey, fieldKey);
+
+    info.partial = !isitInTheCache;
+
+    console.log(info.partial);
+
     const results: string[] = [];
+
     fieldInfos.forEach((fi) => {
       const data = cache.resolveFieldByKey(entityKey, fi.fieldKey) as string[];
       results.push(...data);
