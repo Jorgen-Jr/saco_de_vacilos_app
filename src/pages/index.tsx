@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState } from "react";
 
 import Layout from "../components/Layout";
 
@@ -14,8 +14,6 @@ import { isServer } from "../util/isServer";
 import { Flex, Button } from "@chakra-ui/core";
 
 const Dashboard = () => {
-  // const [posts, setPosts] = useState([]);
-
   const [pagination, setPagination] = useState({
     limit: 10,
     cursor: null as null | string,
@@ -41,16 +39,6 @@ const Dashboard = () => {
   } else {
     //user is logged in
   }
-
-  // useEffect(() => {
-  //   const new_posts = posts;
-  //   if (!postData.fetching && postData.data) {
-  //     postData.data.feed.forEach((post) => {
-  //       new_posts.push(post);
-  //     });
-  //   }
-  //   setPosts(new_posts);
-  // }, [postData]);
 
   const ___posts = [
     {
