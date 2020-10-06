@@ -21,7 +21,7 @@ export type Query = {
   followers?: Maybe<Array<FollowingRelationship>>;
   hello: Scalars['String'];
   posts: Array<Post>;
-  feed: Array<Post>;
+  feed: PaginatedPosts;
   post?: Maybe<Post>;
   postsByAuthor: Array<Post>;
   postUserActions: Array<PostUserAction>;
@@ -119,6 +119,12 @@ export type Post = {
   guilty: User;
   createdAt: Scalars['DateTime'];
   updatedAt: Scalars['DateTime'];
+};
+
+export type PaginatedPosts = {
+  __typename?: 'PaginatedPosts';
+  posts: Array<Post>;
+  hasMore: Scalars['Boolean'];
 };
 
 export type PostUserAction = {
@@ -385,14 +391,18 @@ export type FeedQueryVariables = Exact<{
 
 export type FeedQuery = (
   { __typename?: 'Query' }
-  & { feed: Array<(
-    { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'content' | 'deserved_count' | 'undeserved_count' | 'authorId' | 'guiltyId' | 'initial_balance' | 'status' | 'createdAt' | 'updatedAt'>
-    & { author: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'name'>
-    ) }
-  )> }
+  & { feed: (
+    { __typename?: 'PaginatedPosts' }
+    & Pick<PaginatedPosts, 'hasMore'>
+    & { posts: Array<(
+      { __typename?: 'Post' }
+      & Pick<Post, 'id' | 'content' | 'initial_balance' | 'deserved_count' | 'undeserved_count' | 'createdAt'>
+      & { author: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'name' | 'username'>
+      ) }
+    )> }
+  ) }
 );
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
@@ -528,20 +538,20 @@ export function useRegisterMutation() {
 export const FeedDocument = gql`
     query Feed($limit: Int!, $cursor: String) {
   feed(limit: $limit, cursor: $cursor) {
-    id
-    content
-    deserved_count
-    undeserved_count
-    authorId
-    guiltyId
-    initial_balance
-    status
-    createdAt
-    updatedAt
-    author {
+    hasMore
+    posts {
       id
-      username
-      name
+      content
+      initial_balance
+      deserved_count
+      undeserved_count
+      undeserved_count
+      createdAt
+      author {
+        id
+        name
+        username
+      }
     }
   }
 }

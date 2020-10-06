@@ -14,7 +14,7 @@ import { isServer } from "../util/isServer";
 import { Flex, Button } from "@chakra-ui/core";
 
 const Dashboard = () => {
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
 
   const [pagination, setPagination] = useState({
     limit: 10,
@@ -42,15 +42,15 @@ const Dashboard = () => {
     //user is logged in
   }
 
-  useEffect(() => {
-    const new_posts = posts;
-    if (!postData.fetching && postData.data) {
-      postData.data.feed.forEach((post) => {
-        new_posts.push(post);
-      });
-    }
-    setPosts(new_posts);
-  }, [postData]);
+  // useEffect(() => {
+  //   const new_posts = posts;
+  //   if (!postData.fetching && postData.data) {
+  //     postData.data.feed.forEach((post) => {
+  //       new_posts.push(post);
+  //     });
+  //   }
+  //   setPosts(new_posts);
+  // }, [postData]);
 
   const ___posts = [
     {
@@ -237,9 +237,9 @@ const Dashboard = () => {
                   {postData.fetching && !postData.data ? (
                     <h1>Carregando...</h1>
                   ) : (
-                    <Feed data={posts} />
+                    <Feed data={postData.data.feed.posts} />
                   )}
-                  {postData.data ? (
+                  {postData.data.feed.hasMore ? (
                     <Flex>
                       <Button
                         m="auto"
@@ -248,15 +248,20 @@ const Dashboard = () => {
                           setPagination({
                             limit: pagination.limit,
                             cursor:
-                              postData.data.feed[postData.data.feed.length - 1]
-                                .createdAt,
+                              postData.data.feed.posts[
+                                postData.data.feed.posts.length - 1
+                              ].createdAt,
                           })
                         }
                       >
                         Carregar mais
                       </Button>
                     </Flex>
-                  ) : null}
+                  ) : (
+                    <div style={{ margin: "auto" }}>
+                      Não existem mais vacilos para mostrar
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

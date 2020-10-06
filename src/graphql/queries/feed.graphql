@@ -1,19 +1,19 @@
 query Feed($limit: Int!, $cursor: String) {
   feed(limit: $limit, cursor: $cursor) {
-    id
-    content
-    deserved_count
-    undeserved_count
-    authorId
-    guiltyId
-    initial_balance
-    status
-    createdAt
-    updatedAt
-    author {
+    hasMore
+    posts {
       id
-      username
-      name
+      content
+      initial_balance
+      deserved_count
+      undeserved_count
+      undeserved_count
+      createdAt
+      author {
+        id
+        name
+        username
+      }
     }
   }
 }
