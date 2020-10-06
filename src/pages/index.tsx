@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import Layout from "../components/Layout";
 
@@ -14,6 +14,8 @@ import { isServer } from "../util/isServer";
 import { Flex, Button } from "@chakra-ui/core";
 
 const Dashboard = () => {
+  const [posts, setPosts] = useState([]);
+
   const [pagination, setPagination] = useState({
     limit: 10,
     cursor: null as null | string,
@@ -40,7 +42,17 @@ const Dashboard = () => {
     //user is logged in
   }
 
-  const posts = [
+  useEffect(() => {
+    const new_posts = posts;
+    if (!postData.fetching && postData.data) {
+      postData.data.feed.forEach((post) => {
+        new_posts.push(post);
+      });
+    }
+    setPosts(new_posts);
+  }, [postData]);
+
+  const ___posts = [
     {
       id: 1,
       author_id: 1,
@@ -225,7 +237,7 @@ const Dashboard = () => {
                   {postData.fetching && !postData.data ? (
                     <h1>Carregando...</h1>
                   ) : (
-                    <Feed data={postData.data?.feed} />
+                    <Feed data={posts} />
                   )}
                   {postData.data ? (
                     <Flex>
