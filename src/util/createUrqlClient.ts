@@ -88,7 +88,7 @@ export const createUrqlClient = (ssrExchange: any) => ({
         PaginatedPosts: () => null,
       },
       resolvers: {
-        query: {
+        Query: {
           feed: cursorPagination(),
         },
       },
