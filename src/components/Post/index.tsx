@@ -1,17 +1,16 @@
 import React from "react";
 
 import PersonIcon from "@material-ui/icons/Person";
-import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
-import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import ReceiptIcon from "@material-ui/icons/Receipt";
-import CommentIcon from "@material-ui/icons/Comment";
+
+import { DeservedSection } from "./../DeservedSection";
 
 import { convertToDate } from "./../../util";
+import { Flex } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/core";
 
 const Post = ({ data }) => {
-  async function handleDeserveClick() {}
-  async function handleUndeserveClick() {}
   async function handleCommentClick() {}
 
   return (
@@ -22,53 +21,38 @@ const Post = ({ data }) => {
         </div>
       </div>
       <div className="post-content-container">
-        <div className="post-content">
-          <div className="post-header">
-            <h1>
-              <span className="post-username">@{data.author.username}</span>
-              {data.author.name}
-              {/* {data.author.profile.surname} */}
-            </h1>
-            <div className="created-at">
-              <AccessTimeIcon className="created-at-icon" />
-              <span>
-                {convertToDate(data.createdAt).toLocaleDateString("pt-BR") +
-                  " " +
-                  convertToDate(data.createdAt).getHours() +
-                  ":" +
-                  convertToDate(data.createdAt).getMinutes()}
-              </span>
+        <Flex>
+          <div className="post-content">
+            <div className="post-header">
+              <h1>
+                <span className="post-username">@{data.author.username}</span>
+                {data.author.name}
+                {/* {data.author.profile.surname} */}
+              </h1>
+              <div className="created-at">
+                <AccessTimeIcon className="created-at-icon" />
+                <span>
+                  {convertToDate(data.createdAt).toLocaleDateString("pt-BR") +
+                    " " +
+                    convertToDate(data.createdAt).getHours() +
+                    ":" +
+                    convertToDate(data.createdAt).getMinutes()}
+                </span>
+              </div>
             </div>
+            <p className="post-content-text">{data.content}</p>
+
+            <p className="post-content-value">
+              <ReceiptIcon />
+              <span>
+                {data.initial_balance * data.deserved_count -
+                  data.initial_balance * data.undeserved_count}
+              </span>
+            </p>
           </div>
-          <p className="post-content-text">{data.content}</p>
-          <p className="post-content-value">
-            <ReceiptIcon />
-            <span>
-              {data.initial_balance * data.deserved_count -
-                data.initial_balance * data.undeserved_count}
-            </span>
-          </p>
-        </div>
-        <div className="post-btn-group">
-          <div className="post-btn">
-            <span className="btn-icon">
-              <ThumbUpAltIcon className="btn-icon-icon" />{" "}
-              <span>{data.deserved_count}</span>
-            </span>
-          </div>
-          <div className="post-btn">
-            <span className="btn-icon">
-              <ThumbDownIcon className="btn-icon-icon" />{" "}
-              <span>{data.undeserved_count}</span>
-            </span>
-          </div>
-          <div className="post-btn">
-            <span className="btn-icon">
-              <CommentIcon className="btn-icon-icon" />{" "}
-              {/* <span>{data.comments.length}</span> */}
-            </span>
-          </div>
-        </div>
+
+          <DeservedSection post={data} />
+        </Flex>
       </div>
     </div>
   );

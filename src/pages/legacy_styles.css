@@ -723,6 +723,8 @@ select:disabled {
 
 .post-btn-group {
     display: flex;
+    align-items: center;
+    flex-direction: row;
     border-top: 1px solid #EEE;
 }
 
