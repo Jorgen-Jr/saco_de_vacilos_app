@@ -2,11 +2,10 @@ query Posts {
   posts {
     id
     content
-    deserved_count
-    undeserved_count
+    score
+    multiplier
     authorId
     guiltyId
-    initial_balance
     status
     author {
       username

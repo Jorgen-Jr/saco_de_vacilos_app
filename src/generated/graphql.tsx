@@ -100,6 +100,7 @@ export type User = {
   updatedAt: Scalars['DateTime'];
   posts: Array<Post>;
   guiltyPosts: Array<Post>;
+  votes: Array<PostUserAction>;
 };
 
 
@@ -107,9 +108,8 @@ export type Post = {
   __typename?: 'Post';
   id: Scalars['String'];
   content: Scalars['String'];
-  initial_balance: Scalars['Float'];
-  deserved_count: Scalars['Float'];
-  undeserved_count: Scalars['Float'];
+  multiplier: Scalars['Float'];
+  score: Scalars['Float'];
   view_count: Scalars['Float'];
   status: Scalars['String'];
   active: Scalars['Boolean'];
@@ -121,20 +121,19 @@ export type Post = {
   updatedAt: Scalars['DateTime'];
 };
 
+export type PostUserAction = {
+  __typename?: 'PostUserAction';
+  id: Scalars['String'];
+  value: Scalars['Float'];
+  author: User;
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+};
+
 export type PaginatedPosts = {
   __typename?: 'PaginatedPosts';
   posts: Array<Post>;
   hasMore: Scalars['Boolean'];
-};
-
-export type PostUserAction = {
-  __typename?: 'PostUserAction';
-  id: Scalars['String'];
-  post: Post;
-  author: User;
-  action: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
 };
 
 export type UserSettings = {
@@ -154,8 +153,8 @@ export type Mutation = {
   unfollow: Scalars['Boolean'];
   createPost: Post;
   updatePost?: Maybe<Post>;
+  vote?: Maybe<Post>;
   deletePost: Scalars['Boolean'];
-  createUserAction: PostUserAction;
   deleteUserAction: Scalars['Boolean'];
   register: UserResponse;
   login: UserResponse;
@@ -187,21 +186,19 @@ export type MutationCreatePostArgs = {
 
 
 export type MutationUpdatePostArgs = {
-  undeserved_count: Scalars['Float'];
-  deserve_count: Scalars['Float'];
   content: Scalars['String'];
+  identifier: Scalars['Float'];
+};
+
+
+export type MutationVoteArgs = {
+  value: Scalars['Float'];
   identifier: Scalars['Float'];
 };
 
 
 export type MutationDeletePostArgs = {
   identifier: Scalars['Float'];
-};
-
-
-export type MutationCreateUserActionArgs = {
-  action: Scalars['String'];
-  post: Scalars['Float'];
 };
 
 
@@ -328,7 +325,7 @@ export type CreatePostMutation = (
   { __typename?: 'Mutation' }
   & { createPost: (
     { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'content' | 'initial_balance' | 'deserved_count' | 'undeserved_count' | 'view_count' | 'status' | 'authorId'>
+    & Pick<Post, 'id' | 'content' | 'multiplier' | 'score' | 'view_count' | 'status' | 'authorId'>
   ) }
 );
 
@@ -396,7 +393,7 @@ export type FeedQuery = (
     & Pick<PaginatedPosts, 'hasMore'>
     & { posts: Array<(
       { __typename?: 'Post' }
-      & Pick<Post, 'id' | 'content' | 'initial_balance' | 'deserved_count' | 'undeserved_count' | 'createdAt'>
+      & Pick<Post, 'id' | 'content' | 'multiplier' | 'score' | 'createdAt'>
       & { author: (
         { __typename?: 'User' }
         & Pick<User, 'id' | 'name' | 'username'>
@@ -423,7 +420,7 @@ export type PostsQuery = (
   { __typename?: 'Query' }
   & { posts: Array<(
     { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'content' | 'deserved_count' | 'undeserved_count' | 'authorId' | 'guiltyId' | 'initial_balance' | 'status' | 'createdAt' | 'updatedAt'>
+    & Pick<Post, 'id' | 'content' | 'score' | 'multiplier' | 'authorId' | 'guiltyId' | 'status' | 'createdAt' | 'updatedAt'>
     & { author: (
       { __typename?: 'User' }
       & Pick<User, 'username' | 'name'>
@@ -477,9 +474,8 @@ export const CreatePostDocument = gql`
   createPost(input: $input) {
     id
     content
-    initial_balance
-    deserved_count
-    undeserved_count
+    multiplier
+    score
     view_count
     status
     authorId
@@ -542,10 +538,8 @@ export const FeedDocument = gql`
     posts {
       id
       content
-      initial_balance
-      deserved_count
-      undeserved_count
-      undeserved_count
+      multiplier
+      score
       createdAt
       author {
         id
@@ -576,11 +570,10 @@ export const PostsDocument = gql`
   posts {
     id
     content
-    deserved_count
-    undeserved_count
+    score
+    multiplier
     authorId
     guiltyId
-    initial_balance
     status
     author {
       username

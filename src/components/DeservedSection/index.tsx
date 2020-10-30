@@ -29,7 +29,7 @@ export const DeservedSection: React.FC<DeservedSectionProps> = ({ post }) => {
           </span>
         </div>
       </Box>
-      <Box>{post.deserved_count - post.undeserved_count}</Box>
+      <Box>{post.score}</Box>
       <Box>
         <div className="post-btn">
           <span className="btn-icon">

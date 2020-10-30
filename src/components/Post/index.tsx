@@ -44,10 +44,7 @@ const Post = ({ data }) => {
 
             <p className="post-content-value">
               <ReceiptIcon />
-              <span>
-                {data.initial_balance * data.deserved_count -
-                  data.initial_balance * data.undeserved_count}
-              </span>
+              <span>{data.multiplier * data.score}</span>
             </p>
           </div>
 

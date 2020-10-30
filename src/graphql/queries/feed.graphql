@@ -4,10 +4,8 @@ query Feed($limit: Int!, $cursor: String) {
     posts {
       id
       content
-      initial_balance
-      deserved_count
-      undeserved_count
-      undeserved_count
+      multiplier
+      score
       createdAt
       author {
         id
