@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import Slider from "@material-ui/core/Slider";
 import PersonIcon from "@material-ui/icons/Person";
 import SendIcon from "@material-ui/icons/Send";
 import { Form, Formik, getIn } from "formik";
 import { toErrorMap } from "../../util/toErrorMap";
 
 import { FormInput } from "../Form/FormInput";
-import { Button, FormControl } from "@material-ui/core";
+import {
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+} from "@chakra-ui/core";
 import { useCreatePostMutation } from "../../generated/graphql";
 
 const PrettoSlider = withStyles({
@@ -43,6 +47,8 @@ const PrettoSlider = withStyles({
 const NewPost = () => {
   const [, createPost] = useCreatePostMutation();
 
+  const [multiplier, setMultiplier] = useState(30);
+
   function auto_grow(event) {
     let element = document.getElementById(event.currentTarget.id);
     element.style.height = "5px";
@@ -59,7 +65,7 @@ const NewPost = () => {
         <Formik
           initialValues={{ content: "", initial_balance: 5 }}
           onSubmit={async (values) => {
-            console.log(values);
+            console.log(values, multiplier);
 
             const { error } = await createPost({ input: values });
             if (!error) {
@@ -82,19 +88,15 @@ const NewPost = () => {
                 />
               </div>
 
-              {/* <div className="post-slider">
-                <span>Quanto pesa esse vacilo?</span>
-                <PrettoSlider
-                  name="initial_balance"
-                  onChange={(event) =>
-                    setInitialBalance(event.currentTarget.innerText)
-                  }
-                  scale={(x) => x / 10}
-                  valueLabelDisplay="auto"
-                  aria-label="Valor"
-                  defaultValue={50}
-                />
-              </div> */}
+              <Slider
+                defaultValue={multiplier}
+                onChange={(evt: number) => setMultiplier(evt)}
+              >
+                <SliderTrack />
+                <SliderFilledTrack />
+                <SliderThumb />
+              </Slider>
+
               <div className="new-post-btn-group">
                 <div className="popover-btn-group">
                   {isSubmitting ? null : (

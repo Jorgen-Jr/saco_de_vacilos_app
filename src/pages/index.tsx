@@ -210,50 +210,48 @@ const Dashboard = () => {
     <>
       {fetching ? null : (
         <Layout>
-          <div className="app-container">
-            <div className="dashboard-container">
-              <div style={{ flexGrow: 1, maxWidth: "300px" }}>
-                <div>
-                  <UserCard data={data} />
-                </div>
-              </div>
-              <div style={{ flexGrow: 1, maxWidth: "unset" }}>
-                <div>
-                  <NewPost />
-                </div>
-                <div>
-                  {postData.fetching && !postData.data ? (
-                    <h1>Carregando...</h1>
-                  ) : (
-                    <Feed data={postData.data.feed.posts} />
-                  )}
-                  {postData.data.feed.hasMore ? (
-                    <Flex>
-                      <Button
-                        m="auto"
-                        my={8}
-                        onClick={() =>
-                          setPagination({
-                            limit: pagination.limit,
-                            cursor:
-                              postData.data.feed.posts[
-                                postData.data.feed.posts.length - 1
-                              ].createdAt,
-                          })
-                        }
-                      >
-                        Carregar mais
-                      </Button>
-                    </Flex>
-                  ) : (
-                    <div style={{ margin: "auto" }}>
-                      Não existem mais vacilos para mostrar
-                    </div>
-                  )}
-                </div>
+          <Flex maxW="1000px">
+            <div style={{ flexGrow: 1, maxWidth: "300px" }}>
+              <div>
+                <UserCard data={data} />
               </div>
             </div>
-          </div>
+            <div style={{ flexGrow: 1, maxWidth: "unset" }}>
+              <div>
+                <NewPost />
+              </div>
+              <div>
+                {postData.fetching && !postData.data ? (
+                  <h1>Carregando...</h1>
+                ) : (
+                  <Feed data={postData.data.feed.posts} />
+                )}
+                {postData.data.feed.hasMore ? (
+                  <Flex>
+                    <Button
+                      m="auto"
+                      my={8}
+                      onClick={() =>
+                        setPagination({
+                          limit: pagination.limit,
+                          cursor:
+                            postData.data.feed.posts[
+                              postData.data.feed.posts.length - 1
+                            ].createdAt,
+                        })
+                      }
+                    >
+                      Carregar mais
+                    </Button>
+                  </Flex>
+                ) : (
+                  <div style={{ margin: "auto" }}>
+                    Não existem mais vacilos para mostrar
+                  </div>
+                )}
+              </div>
+            </div>
+          </Flex>
         </Layout>
       )}
     </>

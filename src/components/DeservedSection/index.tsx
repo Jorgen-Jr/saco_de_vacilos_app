@@ -15,33 +15,29 @@ export const DeservedSection: React.FC<DeservedSectionProps> = ({ post }) => {
   }
 
   return (
-    <Flex direction="column" alignItems="center" justifyContent="center">
+    <Flex direction="column" justifyContent="space-around">
       <Box>
-        <div className="post-btn">
-          <span className="btn-icon">
-            <IconButton
-              variantColor="lightgray"
-              color="black"
-              onClick={() => handleDeserveClick()}
-              aria-label="Deserved"
-              icon="chevron-up"
-            />
-          </span>
-        </div>
+        <Flex>
+          <IconButton
+            variantColor="50"
+            color="black"
+            onClick={() => handleDeserveClick()}
+            aria-label="Deserved"
+            icon="chevron-up"
+          />
+        </Flex>
       </Box>
       <Box>{post.score}</Box>
       <Box>
-        <div className="post-btn">
-          <span className="btn-icon">
-            <IconButton
-              variantColor="lightgray"
-              color="black"
-              onClick={() => handleUndeserveClick()}
-              aria-label="Not Deserved"
-              icon="chevron-down"
-            />
-          </span>
-        </div>
+        <Flex>
+          <IconButton
+            variantColor="50"
+            color="black"
+            onClick={() => handleUndeserveClick()}
+            aria-label="Not Deserved"
+            icon="chevron-down"
+          />
+        </Flex>
       </Box>
     </Flex>
   );

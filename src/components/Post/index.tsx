@@ -7,51 +7,71 @@ import ReceiptIcon from "@material-ui/icons/Receipt";
 import { DeservedSection } from "./../DeservedSection";
 
 import { convertToDate } from "./../../util";
-import { Flex } from "@chakra-ui/core";
-import { Box } from "@chakra-ui/core";
+import { Flex, Box, Heading, Text } from "@chakra-ui/core";
 
 const Post = ({ data }) => {
   async function handleCommentClick() {}
 
   return (
-    <div className="post-container">
-      <div className="post-author-pic">
-        <div className="post-profile-pic">
+    <Flex p="10px">
+      <Box>
+        <Flex
+          background="#666"
+          borderRadius="50%"
+          h="40px"
+          w="40px"
+          color="white"
+        >
           <PersonIcon className="post-picture-icon" />
-        </div>
-      </div>
-      <div className="post-content-container">
+        </Flex>
+      </Box>
+      <Box ml="5px" border="1px solid #ddd" borderRadius="5px" flexGrow={1}>
         <Flex>
-          <div className="post-content">
-            <div className="post-header">
-              <h1>
-                <span className="post-username">@{data.author.username}</span>
+          <Box flexGrow={1} m="0 5px" p="10px">
+            <Flex>
+              <Heading
+                display="flex"
+                as="h1"
+                color="#333"
+                fontSize="18px"
+                fontWeight="normal"
+              >
+                <Text color="#666" p="0 5px">
+                  @{data.author.username}
+                </Text>
                 {data.author.name}
-                {/* {data.author.profile.surname} */}
-              </h1>
-              <div className="created-at">
+              </Heading>
+              <Flex
+                justifyContent="flex-end"
+                color="#666"
+                flexGrow={1}
+                fontSize="14px"
+              >
                 <AccessTimeIcon className="created-at-icon" />
-                <span>
+                <Text>
                   {convertToDate(data.createdAt).toLocaleDateString("pt-BR") +
                     " " +
-                    convertToDate(data.createdAt).getHours() +
+                    convertToDate(data.createdAt).getUTCHours() +
                     ":" +
-                    convertToDate(data.createdAt).getMinutes()}
-                </span>
-              </div>
-            </div>
-            <p className="post-content-text">{data.content}</p>
+                    convertToDate(data.createdAt).getUTCHours()}
+                </Text>
+              </Flex>
+            </Flex>
 
-            <p className="post-content-value">
+            <Text color="#555" p="15px 0" textAlign="left">
+              {data.content}
+            </Text>
+
+            <Text color="#666" textAlign="right">
               <ReceiptIcon />
-              <span>{data.multiplier * data.score}</span>
-            </p>
-          </div>
+              <Text as="span">{data.multiplier * data.score}</Text>
+            </Text>
+          </Box>
 
           <DeservedSection post={data} />
         </Flex>
-      </div>
-    </div>
+      </Box>
+    </Flex>
   );
 };
 export default Post;

@@ -4,16 +4,19 @@ import Sidebar from "../Sidebar";
 import Header from "../Header";
 
 import items from "./../../sitemap";
+import { Flex } from "@chakra-ui/core";
 
 export default class Layout extends Component {
   render() {
     return (
       <>
         <Header />
-        <Sidebar items={items} />
-        <div className="system-container" id="system_container">
+        {/* //TODO */}
+        {/* <Sidebar items={items} /> */}
+
+        <Flex pt="70px" justifyContent="center">
           {this.props.children}
-        </div>
+        </Flex>
       </>
     );
   }
