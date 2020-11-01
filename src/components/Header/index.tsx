@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 
-import { Link } from "@chakra-ui/core";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Icon,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Link,
+  Text,
+} from "@chakra-ui/core";
 
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import PersonIcon from "@material-ui/icons/Person";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-
-import SearchIcon from "@material-ui/icons/Search";
-
-import SettingsIcon from "@material-ui/icons/Settings";
-import CancelIcon from "@material-ui/icons/Cancel";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
 import Popover, { ArrowContainer } from "react-tiny-popover";
 
@@ -31,22 +34,28 @@ const Header = () => {
   }
 
   return (
-    <div className="header-container">
-      <h1 className="header-title">
-        <Link onClick={() => router.push("/")} className="header-link">
+    <Flex
+      width="100%"
+      justifyContent="space-evenly"
+      background="white"
+      pos="fixed"
+      p="5px"
+    >
+      <Flex alignItems="center">
+        <Link onClick={() => router.push("/")} p="5px">
           Sobre
         </Link>
-        <Link onClick={() => router.push("/")} className="header-link">
+        <Link onClick={() => router.push("/")} p="5px">
           Ajuda
         </Link>
-      </h1>
-      <div className="search-bar">
-        <div className="search-icon">
-          <SearchIcon />
-        </div>
-        <input placeholder="Busca..." className="search-input" />
-      </div>
-      <div className="header-btn-group">
+      </Flex>
+
+      <InputGroup flexGrow={1} maxW="650px">
+        <InputLeftElement children={<Icon name="search" color="gray.300" />} />
+        <Input type="search" placeholder="O que quer buscar?" />
+      </InputGroup>
+
+      <Flex>
         <Popover
           isOpen={isNotificationPopoverOpen}
           position={"bottom"}
@@ -59,15 +68,15 @@ const Header = () => {
               arrowColor={"white"}
               arrowSize={10}
             >
-              <div
-                className="popover-container"
-                style={{
-                  minWidth: "350px",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
+              <Flex
+                overflow="hidden"
+                background="white"
+                borderRadius="7px"
+                boxShadow="1px 1px 10px rgb(153, 178, 209)"
+                minW="350px"
+                flexDir="column"
               >
-                <div style={{ maxHeight: "600px", overflowY: "scroll" }}>
+                <Box maxHeight="600px" overflowY="scroll">
                   {notifications.length > 0 ? (
                     notifications.map((notification, index) => (
                       <>
@@ -75,38 +84,51 @@ const Header = () => {
                       </>
                     ))
                   ) : (
-                    <div
-                      style={{
-                        minHeight: "150px",
-                        padding: "15px",
-                        display: "flex",
-                        flexDirection: "column-reverse",
-                        textAlign: "center",
-                        color: "#555",
-                      }}
+                    <Flex
+                      minHeight="150px"
+                      padding="15px"
+                      flexDirection="column-reverse"
+                      textAlign="center"
+                      color="#555"
                     >
-                      <p>Não existem novas notificações...</p>
-                    </div>
+                      <Text as="p">Não existem novas notificações...</Text>
+                    </Flex>
                   )}
-                </div>
-                <button className="btn-popover btn-edit" onClick={handleLogout}>
-                  <MoreHorizIcon />
-                </button>
-              </div>
+                </Box>
+                <Button
+                  variant="solid"
+                  background="#333"
+                  color="white"
+                  _hover={{
+                    background: "#DDD",
+                    color: "#333",
+                  }}
+                  onClick={handleLogout}
+                >
+                  <Icon name="chevron-down" />
+                </Button>
+              </Flex>
             </ArrowContainer>
           )}
         >
-          <div className="header-item">
+          <Flex>
             <Link
               onClick={() => {
                 setNotificationPopover(!isNotificationPopoverOpen);
               }}
             >
-              <div className="profile">
-                <NotificationsIcon className="header-icon" />
-              </div>
+              <Flex
+                alignItems="center"
+                justifyContent="center"
+                borderRadius="50%"
+                h="40px"
+                w="40px"
+                background="#eee"
+              >
+                <Icon name="bell" m="auto" size="24px" color="#333" />
+              </Flex>
             </Link>
-          </div>
+          </Flex>
         </Popover>
 
         <Popover
@@ -121,50 +143,81 @@ const Header = () => {
               arrowColor={"white"}
               arrowSize={10}
             >
-              <div className="popover-container">
-                <div className="popover-content">
-                  <h1 className="profile-username">Olá, </h1>
-                  <p className="profile-info">
+              <Flex
+                overflow="hidden"
+                background="white"
+                borderRadius="7px"
+                boxShadow="1px 1px 10px rgb(153, 178, 209)"
+                minW="250px"
+                flexDir="column"
+              >
+                <Box maxHeight="600px" overflowY="scroll" p="15px">
+                  <Heading as="h1" fontSize="18px">
+                    Olá,{" "}
+                  </Heading>
+                  <Text as="p">
                     Nome de Usuário: <b></b>
-                  </p>
-                  <p className="profile-info">E-Mail:</p>
-                </div>
-                <div className="popover-btn-group">
+                  </Text>
+                  <Text as="p">E-Mail:</Text>
+                </Box>
+                <Flex>
                   <Link
-                    className="btn-popover"
+                    flexGrow={1}
+                    background="#666"
+                    color="white"
+                    _hover={{
+                      background: "#DDD",
+                      color: "#333",
+                    }}
                     onClick={() => router.push("/user")}
                   >
-                    <SettingsIcon />
-                    Editar
+                    <Flex alignContent="center" p="7px" justifyContent="center">
+                      <Icon name="settings" mt="3px" mr="7px" />
+                      Editar
+                    </Flex>
                   </Link>
-                  <button
-                    className="btn-popover btn-logout"
+                  <Button
+                    borderRadius="0"
+                    flexGrow={1}
+                    variant="solid"
+                    background="rgb(218, 60, 60)"
+                    color="white"
+                    _hover={{
+                      background: "#333",
+                      color: "rgb(255, 98, 98)",
+                    }}
                     onClick={handleLogout}
-                    disabled={fetching}
                   >
-                    <CancelIcon />
+                    <Icon name="small-close" m="7px" />
                     Sair
-                  </button>
-                </div>
-              </div>
+                  </Button>
+                </Flex>
+              </Flex>
             </ArrowContainer>
           )}
         >
-          <div className="header-item">
+          <Flex ml="5px">
             <Link
               onClick={() => {
                 setProfilePopover(!isProfilePopoverOpen);
               }}
             >
-              <div className="profile">
-                <PersonIcon className="header-icon" />
-              </div>
+              <Flex
+                alignItems="center"
+                justifyContent="center"
+                borderRadius="50%"
+                h="40px"
+                w="40px"
+                background="#eee"
+              >
+                <PersonIcon />
+              </Flex>
             </Link>
-            <ArrowDropDownIcon className="popover-icon" />
-          </div>
+            <Icon name="triangle-down" m="auto" size="12px" color="#333" />
+          </Flex>
         </Popover>
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   );
 };
 

@@ -22,7 +22,9 @@ const Post = ({ data }) => {
           w="40px"
           color="white"
         >
-          <PersonIcon className="post-picture-icon" />
+          <Flex alignItems="center" m="auto">
+            <PersonIcon />
+          </Flex>
         </Flex>
       </Box>
       <Box ml="5px" border="1px solid #ddd" borderRadius="5px" flexGrow={1}>

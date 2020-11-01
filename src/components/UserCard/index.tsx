@@ -25,7 +25,9 @@ const UserCard: React.FC<UserCardProps> = ({ data }) => {
         m="auto"
         color="white"
       >
-        <PersonIcon className="profile-picture-icon" />
+        <Flex alignItems="center" m="auto">
+          <PersonIcon />
+        </Flex>
       </Flex>
       <Box textAlign="center">
         <Text fontSize="16px" fontWeight="bold" m="10px 0">
