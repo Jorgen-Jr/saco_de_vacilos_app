@@ -1,48 +1,22 @@
 import React, { useState } from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
 import PersonIcon from "@material-ui/icons/Person";
 import SendIcon from "@material-ui/icons/Send";
-import { Form, Formik, getIn } from "formik";
+import { Form, Formik } from "formik";
 import { toErrorMap } from "../../util/toErrorMap";
 
 import { FormInput } from "../Form/FormInput";
+
 import {
   Slider,
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
+  Flex,
+  Box,
+  Button,
 } from "@chakra-ui/core";
-import { useCreatePostMutation } from "../../generated/graphql";
 
-const PrettoSlider = withStyles({
-  root: {
-    color: "#52af77",
-    height: 8,
-  },
-  thumb: {
-    height: 24,
-    width: 24,
-    backgroundColor: "#fff",
-    border: "2px solid currentColor",
-    marginTop: -8,
-    marginLeft: -12,
-    "&:focus, &:hover, &$active": {
-      boxShadow: "inherit",
-    },
-  },
-  active: {},
-  valueLabel: {
-    left: "calc((-50% + 4px))",
-  },
-  track: {
-    height: 8,
-    borderRadius: 4,
-  },
-  rail: {
-    height: 8,
-    borderRadius: 4,
-  },
-})(Slider);
+import { useCreatePostMutation } from "../../generated/graphql";
 
 const NewPost = () => {
   const [, createPost] = useCreatePostMutation();
@@ -56,11 +30,25 @@ const NewPost = () => {
   }
 
   return (
-    <div className="dashboard-card">
-      <div className="new-post-container">
-        <div className="post-profile-pic">
+    <Flex
+      borderRadius="10px"
+      background="white"
+      minH="70px"
+      justifyContent="center"
+      m="15px"
+      pt="15px"
+    >
+      <Flex w="100%" pl="10px">
+        <Flex
+          background="#666"
+          borderRadius="50%"
+          h="40px"
+          w="40px"
+          color="white"
+          mr="10px"
+        >
           <PersonIcon className="post-picture-icon" />
-        </div>
+        </Flex>
 
         <Formik
           initialValues={{ content: "", initial_balance: 5 }}
@@ -75,8 +63,8 @@ const NewPost = () => {
           }}
         >
           {({ isSubmitting }) => (
-            <Form>
-              <div>
+            <Form style={{ width: "100%" }}>
+              <Box w="100%">
                 <FormInput
                   textarea={true}
                   id="new_post_input"
@@ -86,7 +74,7 @@ const NewPost = () => {
                   name="content"
                   label=""
                 />
-              </div>
+              </Box>
 
               <Slider
                 defaultValue={multiplier}
@@ -97,21 +85,26 @@ const NewPost = () => {
                 <SliderThumb />
               </Slider>
 
-              <div className="new-post-btn-group">
-                <div className="popover-btn-group">
+              <Box>
+                <Flex>
                   {isSubmitting ? null : (
-                    <button className="btn-send" type="submit">
+                    <Button
+                      variantColor="color-50"
+                      className="btn-send"
+                      type="submit"
+                    >
                       Enviar
+                      {/* //TODO Change this send icon (It's from material-ui) */}
                       <SendIcon />
-                    </button>
+                    </Button>
                   )}
-                </div>
-              </div>
+                </Flex>
+              </Box>
             </Form>
           )}
         </Formik>
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   );
 };
 

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 
-import Sidebar from "../Sidebar";
 import Header from "../Header";
 
-import items from "./../../sitemap";
 import { Flex } from "@chakra-ui/core";
 
 export default class Layout extends Component {
