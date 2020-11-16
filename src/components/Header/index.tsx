@@ -17,7 +17,7 @@ import PersonIcon from "@material-ui/icons/Person";
 
 import Popover, { ArrowContainer } from "react-tiny-popover";
 
-import NotificationItem from "./NotificationItem";
+// import NotificationItem from "./NotificationItem";
 import { useRouter } from "next/router";
 import { useLogoutMutation } from "../../generated/graphql";
 
@@ -25,7 +25,7 @@ const Header = () => {
   const router = useRouter();
   const [isProfilePopoverOpen, setProfilePopover] = useState(false);
   const [isNotificationPopoverOpen, setNotificationPopover] = useState(false);
-  const [notifications, setNotifications] = useState([]);
+  // const [notifications, setNotifications] = useState([]);
 
   const [{ fetching }, logout] = useLogoutMutation();
 
@@ -77,7 +77,7 @@ const Header = () => {
                 flexDir="column"
               >
                 <Box maxHeight="600px" overflowY="scroll">
-                  {notifications.length > 0 ? (
+                  {/* {notifications.length > 0 ? (
                     notifications.map((notification, index) => (
                       <>
                         <NotificationItem key={index} data={notification} />
@@ -93,7 +93,7 @@ const Header = () => {
                     >
                       <Text as="p">Não existem novas notificações...</Text>
                     </Flex>
-                  )}
+                  )} */}
                 </Box>
                 <Button
                   variant="solid"
