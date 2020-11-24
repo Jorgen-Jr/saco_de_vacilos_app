@@ -9,9 +9,6 @@ export default class Layout extends Component {
     return (
       <>
         <Header />
-        {/* //TODO */}
-        {/* <Sidebar items={items} /> */}
-
         <Flex pt="70px" justifyContent="center">
           {this.props.children}
         </Flex>

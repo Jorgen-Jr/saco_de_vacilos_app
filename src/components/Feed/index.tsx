@@ -14,6 +14,7 @@ const Feed = ({ data }) => {
       m="15px"
       pt="15px"
       overflow="hidden"
+      minW="550px"
     >
       {data ? (
         data.length > 0 ? (

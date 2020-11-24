@@ -27,7 +27,7 @@ export const DeservedSection: React.FC<DeservedSectionProps> = ({ post }) => {
           />
         </Flex>
       </Box>
-      <Box>{post.score}</Box>
+      <Box textAlign="center">{post.score}</Box>
       <Box>
         <Flex>
           <IconButton

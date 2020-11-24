@@ -63,7 +63,7 @@ const NewPost = () => {
           }}
         >
           {({ isSubmitting }) => (
-            <Form style={{ width: "100%" }}>
+            <Form style={{ width: "100%", padding: "15px" }}>
               <Box w="100%">
                 <FormInput
                   textarea={true}
