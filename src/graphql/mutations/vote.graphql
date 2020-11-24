@@ -1,0 +1,3 @@
+mutation Vote($value: Float!, $postId: Int!) {
+  vote(value: $value, post_id: $postId)
+}

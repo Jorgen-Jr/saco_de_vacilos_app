@@ -153,7 +153,7 @@ export type Mutation = {
   unfollow: Scalars['Boolean'];
   createPost: Post;
   updatePost?: Maybe<Post>;
-  vote?: Maybe<Post>;
+  vote?: Maybe<Scalars['Boolean']>;
   deletePost: Scalars['Boolean'];
   deleteUserAction: Scalars['Boolean'];
   register: UserResponse;
@@ -193,7 +193,7 @@ export type MutationUpdatePostArgs = {
 
 export type MutationVoteArgs = {
   value: Scalars['Float'];
-  identifier: Scalars['Float'];
+  post_id: Scalars['Int'];
 };
 
 
@@ -380,6 +380,17 @@ export type RegisterMutation = (
   ) }
 );
 
+export type VoteMutationVariables = Exact<{
+  value: Scalars['Float'];
+  postId: Scalars['Int'];
+}>;
+
+
+export type VoteMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'vote'>
+);
+
 export type FeedQueryVariables = Exact<{
   limit: Scalars['Int'];
   cursor?: Maybe<Scalars['String']>;
@@ -530,6 +541,15 @@ export const RegisterDocument = gql`
 
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
+};
+export const VoteDocument = gql`
+    mutation Vote($value: Float!, $postId: Int!) {
+  vote(value: $value, post_id: $postId)
+}
+    `;
+
+export function useVoteMutation() {
+  return Urql.useMutation<VoteMutation, VoteMutationVariables>(VoteDocument);
 };
 export const FeedDocument = gql`
     query Feed($limit: Int!, $cursor: String) {

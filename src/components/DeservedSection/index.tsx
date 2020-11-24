@@ -1,17 +1,19 @@
 import { Box, Flex, IconButton } from "@chakra-ui/core";
 import React from "react";
-import { PostsQuery } from "../../generated/graphql";
+import { PostsQuery, useVoteMutation } from "../../generated/graphql";
 
 interface DeservedSectionProps {
   post: PostsQuery["posts"][0];
 }
 
 export const DeservedSection: React.FC<DeservedSectionProps> = ({ post }) => {
+  const [, vote] = useVoteMutation();
+
   async function handleDeserveClick() {
-    console.log("haha, merecido");
+    await vote({ postId: parseInt(post.id), value: 1 });
   }
   async function handleUndeserveClick() {
-    console.log("Oh no...");
+    await vote({ postId: parseInt(post.id), value: -1 });
   }
 
   return (
