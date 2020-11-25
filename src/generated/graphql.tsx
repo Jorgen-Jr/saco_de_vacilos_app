@@ -82,7 +82,7 @@ export type QueryUserProfileArgs = {
 
 export type FollowingRelationship = {
   __typename?: 'FollowingRelationship';
-  id: Scalars['String'];
+  id: Scalars['Float'];
   user: User;
   following: User;
   createdAt: Scalars['DateTime'];
@@ -106,7 +106,7 @@ export type User = {
 
 export type Post = {
   __typename?: 'Post';
-  id: Scalars['String'];
+  id: Scalars['Float'];
   content: Scalars['String'];
   multiplier: Scalars['Float'];
   score: Scalars['Float'];
@@ -382,7 +382,7 @@ export type RegisterMutation = (
 
 export type VoteMutationVariables = Exact<{
   value: Scalars['Float'];
-  postId: Scalars['Int'];
+  post_id: Scalars['Int'];
 }>;
 
 
@@ -543,8 +543,8 @@ export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
 };
 export const VoteDocument = gql`
-    mutation Vote($value: Float!, $postId: Int!) {
-  vote(value: $value, post_id: $postId)
+    mutation Vote($value: Float!, $post_id: Int!) {
+  vote(value: $value, post_id: $post_id)
 }
     `;
 

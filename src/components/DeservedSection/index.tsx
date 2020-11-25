@@ -10,10 +10,10 @@ export const DeservedSection: React.FC<DeservedSectionProps> = ({ post }) => {
   const [, vote] = useVoteMutation();
 
   async function handleDeserveClick() {
-    await vote({ postId: parseInt(post.id), value: 1 });
+    await vote({ post_id: post.id, value: 1 });
   }
   async function handleUndeserveClick() {
-    await vote({ postId: parseInt(post.id), value: -1 });
+    await vote({ post_id: post.id, value: -1 });
   }
 
   return (
